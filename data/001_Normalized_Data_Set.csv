@@ -1,0 +1,253 @@
+﻿ID,NAME,CURRENCY
+-1,Northern Cyprus,TRY
+-2,Kosovo,EUR
+-3,Somaliland,OTH
+4,Afghanistan,OTH
+8,Albania,EUR
+10,Antarctica,OTH
+12,Algeria,OTH
+16,American Samoa,USD
+20,Andorra,EUR
+24,Angola,OTH
+28,Antigua and Barbuda,OTH
+31,Azerbaijan,EUR
+32,Argentina,ARS
+36,Australia,AUD
+40,Austria,EUR
+44,Bahamas,OTH
+48,Bahrain,OTH
+50,Bangladesh,OTH
+51,Armenia,EUR
+52,Barbados,OTH
+56,Belgium,EUR
+60,Bermuda,OTH
+64,Bhutan,OTH
+68,"Bolivia, Plurinational State of",OTH
+70,Bosnia and Herzegovina,EUR
+72,Botswana,OTH
+74,Bouvet Island,NOK
+76,Brazil,BRL
+84,Belize,OTH
+86,British Indian Ocean Territory,GBP
+90,Solomon Islands,OTH
+92,"Virgin Islands, British",GBP
+96,Brunei Darussalam,OTH
+100,Bulgaria,OTH
+104,Myanmar,OTH
+108,Burundi,OTH
+112,Belarus,EUR
+116,Cambodia,OTH
+120,Cameroon,OTH
+124,Canada,CAD
+132,Cape Verde,OTH
+136,Cayman Islands,OTH
+140,Central African Republic,OTH
+144,Sri Lanka,OTH
+148,Chad,OTH
+152,Chile,CLP
+156,China,CNY
+158,"Taiwan, Province of China",OTH
+162,Christmas Island,AUD
+166,Cocos (Keeling) Islands,AUD
+170,Colombia,COP
+174,Comoros,OTH
+175,Mayotte,EUR
+178,Congo,OTH
+180,"Congo, the Democratic Republic of the",OTH
+184,Cook Islands,NZD
+188,Costa Rica,OTH
+191,Croatia,HRK
+192,Cuba,OTH
+196,Cyprus,EUR
+203,Czech Republic,CZK
+204,Benin,OTH
+208,Denmark,DKK
+212,Dominica,OTH
+214,Dominican Republic,DOP
+218,Ecuador,USD
+222,El Salvador,USD
+226,Equatorial Guinea,OTH
+231,Ethiopia,OTH
+232,Eritrea,OTH
+233,Estonia,EUR
+234,Faroe Islands,DKK
+238,Falkland Islands (Malvinas),OTH
+239,South Georgia and the South Sandwich Islands,GBP
+242,Fiji,OTH
+246,Finland,EUR
+248,Ã…land Islands,OTH
+250,France,EUR
+254,French Guiana,EUR
+258,French Polynesia,OTH
+260,French Southern Territories,EUR
+262,Djibouti,OTH
+266,Gabon,OTH
+268,Georgia,EUR
+270,Gambia,OTH
+275,"Palestinian Territory, Occupied",OTH
+276,Germany,EUR
+288,Ghana,OTH
+292,Gibraltar,OTH
+296,Kiribati,AUD
+300,Greece,EUR
+304,Greenland,OTH
+308,Grenada,OTH
+312,Guadeloupe,EUR
+316,Guam,USD
+320,Guatemala,OTH
+324,Guinea,OTH
+328,Guyana,OTH
+332,Haiti,OTH
+334,Heard Island and McDonald Islands,AUD
+336,Holy See (Vatican City State),EUR
+340,Honduras,OTH
+344,Hong Kong,HKD
+348,Hungary,HUF
+352,Iceland,EUR
+356,India,INR
+360,Indonesia,IDR
+364,"Iran, Islamic Republic of",IRR
+368,Iraq,OTH
+372,Ireland,EUR
+376,Israel,OTH
+380,Italy,EUR
+384,Côte d’Ivoire,OTH
+388,Jamaica,OTH
+392,Japan,JPY
+398,Kazakhstan,KZT
+400,Jordan,OTH
+404,Kenya,KES
+408,"Korea, Democratic People's Republic of",OTH
+410,"Korea, Republic of",OTH
+414,Kuwait,OTH
+417,Kyrgyzstan,OTH
+418,Laos People's Democratic Republic,OTH
+422,Lebanon,OTH
+426,Lesotho,OTH
+428,Latvia,EUR
+430,Liberia,OTH
+434,Libya,OTH
+438,Liechtenstein,CHF
+440,Lithuania,EUR
+442,Luxembourg,EUR
+446,Macao,OTH
+450,Madagascar,OTH
+454,Malawi,OTH
+458,Malaysia,MYR
+462,Maldives,OTH
+466,Mali,OTH
+470,Malta,EUR
+474,Martinique,EUR
+478,Mauritania,OTH
+480,Mauritius,OTH
+484,Mexico,MXN
+492,Monaco,EUR
+496,Mongolia,OTH
+498,"Moldova, Republic of",EUR
+499,Montenegro,EUR
+500,Montserrat,OTH
+504,Morocco,MAD
+508,Mozambique,OTH
+512,Oman,OTH
+516,Namibia,OTH
+520,Nauru,AUD
+524,Nepal,OTH
+528,Netherlands,EUR
+531,Curacao,OTH
+533,Aruba,OTH
+534,Sint Maarten (Dutch part),OTH
+535,"Bonaire, Sint Eustatius and Saba",USD
+540,New Caledonia,OTH
+548,Vanuatu,OTH
+554,New Zealand,NZD
+558,Nicaragua,OTH
+562,Niger,OTH
+566,Nigeria,NGN
+570,Niue,NZD
+574,Norfolk Island,AUD
+578,Norway,NOK
+580,Northern Mariana Islands,USD
+581,United States Minor Outlying Islands,USD
+583,"Micronesia, Federated States of",USD
+584,Marshall Islands,USD
+585,Palau,USD
+586,Pakistan,PKR
+591,Panama,OTH
+598,Papua New Guinea,OTH
+600,Paraguay,OTH
+604,Peru,PEN
+608,Philippines,PHP
+612,Pitcairn,NZD
+616,Poland,PLN
+620,Portugal,EUR
+624,Guinea-Bissau,OTH
+626,Timor-Leste,USD
+630,Puerto Rico,USD
+634,Qatar,OTH
+638,RÃ©union,OTH
+642,Romania,RON
+643,Russian Federation,RUB
+646,Rwanda,OTH
+652,Saint Barthélemy,EUR
+654,"Saint Helena, Ascension and Tristan da Cunha",OTH
+659,Saint Kitts and Nevis,OTH
+660,Anguilla,OTH
+662,Saint Lucia,OTH
+663,Saint Martin (French part),EUR
+666,Saint Pierre and Miquelon,EUR
+670,Saint Vincent and the Grenadines,OTH
+674,San Marino,EUR
+678,Sao Tome and Principe,OTH
+682,Saudi Arabia,SAR
+686,Senegal,OTH
+688,Serbia,OTH
+690,Seychelles,OTH
+694,Sierra Leone,OTH
+702,Singapore,SGD
+703,Slovakia,EUR
+704,Viet Nam,VND
+705,Slovenia,EUR
+706,Somalia,OTH
+710,South Africa,ZAR
+716,Zimbabwe,OTH
+724,Spain,EUR
+728,South Sudan,OTH
+729,Sudan,OTH
+732,Western Sahara,MAD
+740,Suriname,OTH
+744,Svalbard and Jan Mayen,NOK
+748,Swaziland,OTH
+752,Sweden,SEK
+756,Switzerland,CHF
+760,Syrian Arab Republic,OTH
+762,Tajikistan,OTH
+764,Thailand,THB
+768,Togo,OTH
+772,Tokelau,NZD
+776,Tonga,OTH
+780,Trinidad and Tobago,OTH
+784,United Arab Emirates,AED
+788,Tunisia,OTH
+792,Turkey,TRY
+795,Turkmenistan,OTH
+796,Turks and Caicos Islands,USD
+798,Tuvalu,OTH
+800,Uganda,OTH
+804,Ukraine,UAH
+807,"Macedonia, the former Yugoslav Republic of",EUR
+818,Egypt,OTH
+826,United Kingdom,GBP
+831,Guernsey,GBP
+832,Jersey,GBP
+833,Isle of Man,GBP
+834,"Tanzania, United Republic of",TZS
+840,United States,USD
+850,"Virgin Islands, U.S.",USD
+854,Burkina Faso,OTH
+858,Uruguay,OTH
+860,Uzbekistan,OTH
+862,"Venezuela, Bolivarian Republic of",VEF
+876,Wallis and Futuna,OTH
+882,Samoa,USD
+887,Yemen,OTH
+894,Zambia,OTH
