@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Visualization Implementation #7 - Jason Orender</title>
+    <style>
+      body { 
+        color: #666; 
+        background: #f3f3f3; 
+        font: normal 10px "Helvetica Neue", Helvetica, sans-serif; 
+        margin: 2em; 
+        }
+      #map {
+        border:2px solid #000;
+        width:960px;
+        height:550px;
+        margin-left: 40px;
+        }      
+      #chart {
+        border:2px solid #000;
+        width:960px;
+        height:200px;
+        margin-left: 40px;
+        }
+      .country {
+        fill: #ccc;
+        stroke: #fff;
+        stroke-width: .5px;
+        stroke-linejoin: round;
+        }
+      .hidden { 
+        display: none; 
+        }
+      div.tooltip {
+        color: #222; 
+        background: #fff; 
+        padding: .5em; 
+        text-shadow: #f5f5f5 0 1px 0;
+        border-radius: 2px; 
+        box-shadow: 0px 0px 2px 0px #a6a6a6; 
+        opacity: 0.9; 
+        position: absolute;
+        }
+      h1 {}
+        .h11 {
+          color: #CC0000;
+          font-size: 36px;
+          font-family: 'Impact', monospace;
+          text-align: center;
+          }
+      p {}
+        .para2 { 
+          font-size: 24px;
+          text-decoration: underline;
+        }
+        .para3 {
+          font-size: 18px;
+        }
+        .para4 {
+          color: #009900;
+          font-size: 18px;
+          font-family: monospace;
+        }
+        .para4a {
+          color: #009900;
+          font-size: 18px;
+          font-family: monospace;
+          margin-left: 80px;
+        }
+        .para5 {
+          font-size: 18px;
+          margin-left: 40px;
+        }
+      svg { border: 1px solid #dedede; }
+		.axis path, .axis line {
+  			fill: none;
+  			stroke: #000;
+  			shape-rendering: crispEdges;
+		}
+		.area { fill: #4ca3bd; }
+    </style>
+  </head>
+  <body>
+    <h1 class="h11">Solution web page for assignment #8</h1>
+    <p class="para5">For this assignment, I am using the same choropleth chart that I am developing for the final project and adding an additional chart off to the bottom that switches to the Bitcoin exchange rate in that country as a function of time.  This is similar to the implementation that I plan to use for the final project. I found <a href="https://www.mattlayman.com/2015/d3js-area-chart.html">this linked</a> tutorial to be very useful in creating the area chart.  This <a href="https://stackoverflow.com/questions/4431459/javascript-array-struct#4431496">linked explanation</a> of creating and using object structures in javascript also help me get past a roadblock.  See the exchange rate progression over the entire 241 weeks of data for a particular country by clicking on that country, and conversely, the choropleth time frame can be shifted by clicking on the exchange rate graph.</p>
+      <!-- dropdown -->
+    <div style="margin-left: 40px">
+      <select id="dropdown"></select>
+      <rect id="button" style="width: 25px; height: 25px"></rect>
+    </div>
+    <hr style="width: 100%; height: 2px;">
+    <h2 style="margin-left: 40px; font-size: 24px; font-weight: bold; color: #000000;">Relative Bitcoin Volume</h2>
+    <h3 id="weekof" style="margin-left: 40px; font-size: 18px;"></h3>
+    <div id="map">
+    </div>
+    <div id="chart">
+	    <svg id="area">
+		</svg>
+	</div>
+	<p id="chartnote" style="margin-left: 40px; font-size: 12px">* BTC exchange rate shown is for the United States in USD.<br/><br/></p>
+    <hr style="width: 100%; height: 2px;">
+    <p class="para5">NOTE: Any country with insufficient activity in local currency-to-Bitcoin trading is grayed out, and is denoted by "Other" ("OTH") in the currency designation appearing beside the country name within the square brackets in the mouseover text.  For example, the US would be displayed as "United states [USD]" upon mouse-over. Select any time period from the drop-down or click the rightward facing triangle to step through each time step.</p>
+    <hr style="width: 100%; height: 2px;">
+    <p class="para5">This map shows relative trading volume of Bitcoin in the currency of each region.  Gray is indicative of no data exceeding a minimum threshold of half of the historical average trading volume.  For instance, the average US Dollar trading volume over the entirety of the data is an average of $4.6 million per week.  The data is reflected on the map when the trading volume exceeds $2.3 million per week; from that point forward all data will be reflected on the map, even if it dips below $2.3 million in any given week.  This prevents the wild gyrations that occur during initial adoption from having an effect on the map.</p>
+    <p class="para5">Blue color is indicative of relatively low trading volume, while red denotes high trading volume.  A purple color shows a relatively average performance with respect to the previous few weeks.  The current trading volume is compared with a trailing 6 week average in order to calculate the relative performance.  The resultant numbers are dimensionless so that different currencies can be compared to one another.</p>
+    <p class="para5">A notable insight that can be gained from stepping through the data is by noticing where the highest activity regions are when the red time marker is in close proximity to a spike or dip in the exchange rate.  The change in exchange volume in these regions is likely directly related to the change in exchange rate (note that the display for Bitcoin exchange rate can be shown for any individual country by clicking on it - the best proxy for an overall worldwide exchange rate is that of the US Dollar or Euro, which are typically not affected by local events).</p>
+    <script src="js/d3.v3.min.js"></script>
+    <script src="js/queue.v1.min.js"></script>
+    <script src="js/topojson.js"></script>
+    <script src="js/dropdown_options.js"></script> 
+    <script>
+
+      // populate drop-down
+      d3.select("#dropdown")
+          .selectAll("option")
+          .data(dropdown_options)
+          .enter()
+          .append("option")
+          .attr("value", function(option) { return option.value; })
+          .text(function(option) { return option.text; });
+
+      d3.select("#button").html("<img src='play_button.png'></img>");
+
+
+      // initial dataset on load
+      var selected_dataset = "1";
+
+      // dropdown dataset selection
+      var dropDown = d3.select("#dropdown");
+      var dropDownHTML = document.getElementById("dropdown");
+      var playButton = d3.select("#button");
+      var subtitle = d3.select("#weekof");
+      var chartnote = d3.select("#chartnote");
+
+      // The SVG container
+      var width  = 960,
+          height = 550;
+
+      var xrchart_width = 960,
+      	  xrchart_height = 200;
+
+      //var color = d3.scale.category10();
+      var color = d3.scale.linear()
+                          .domain([0,1000])
+                          .interpolate(d3.interpolateRgb)
+                          .range(["blue","red"]);
+
+      var inactive_color = "gray";
+
+      var projection = d3.geo.mercator()
+                          .translate([480, 300])
+                          .scale(970);
+
+      var path = d3.geo.path()
+                          .projection(projection);
+
+      var svg = d3.select("#map").append("svg")
+                          .attr("width", width)
+                          .attr("height", height);
+
+
+      var tooltip = d3.select("#map").append("div")
+      					  .attr("id","datettp")
+                          .attr("class", "tooltip")
+                          .classed("hidden", true);
+
+      var chartbackground = d3.select("#chart");
+      var chartbackgroundHTML = document.getElementById("chart");
+
+      var date_tooltip = d3.select("#chart").append("div")
+                          .attr("class", "tooltip")
+                          .attr("style","text-anchor:middle")
+                          .classed("hidden", true);
+
+
+      queue()
+        .defer(d3.json, "data/world-110m.json")
+        .defer(d3.csv, "data/world-country-names.csv")
+        .defer(d3.csv, "data/001_Normalized_Data_Set.csv")
+        .defer(d3.csv, "data/xrdata.csv")
+        .await(ready);
+
+      function ready(error, world, names, dataset, xrdata) {
+
+    	var yvalue;
+   		var chartdata = [];
+   		xrdata.forEach(function(d) {
+   			if (isNaN(parseFloat(d.BTCUSD))) yvalue = 0.0;
+   			else                             yvalue = parseFloat(d.BTCUSD); 
+   			chartdata.push({ x: parseFloat(d.Index), y: yvalue, date: d.Date });
+   			//chartdata.push({ x: Date(d.Date), y: parseFloat(d.BTCUSD) });
+   		});
+
+
+		var margin = {top: 20, right: 20, bottom: 60, left: 70},
+    		iwidth = xrchart_width - margin.left - margin.right,
+    		iheight = xrchart_height - margin.top - margin.bottom;
+
+		var x = d3.scale.linear()
+    		.domain([0, d3.max(chartdata, function(d) { return d.x; })])
+    		.range([0, iwidth]);
+
+    	var xreverse = d3.scale.linear()
+    		.domain([0, iwidth])
+    		.range([0, d3.max(chartdata, function(d) { return d.x; })]);
+
+		var y = d3.scale.linear()
+    		.domain([0, d3.max(chartdata, function(d) { return d.y; })])
+    		.range([iheight, 0]);
+
+		var xAxis = d3.svg.axis()
+    		.scale(x)
+    		.orient("bottom");
+
+		var yAxis = d3.svg.axis()
+    		.scale(y)
+    		.orient("left");
+
+		var area = d3.svg.area()
+    		.x(function(d) { return x(d.x); })
+    		.y0(iheight)
+    		.y1(function(d) { return y(d.y); });
+
+		var cht = d3.select("svg#area")
+    		.attr("width", iwidth + margin.left + margin.right)
+    		.attr("height", iheight + margin.top + margin.bottom)
+ 			.append("g")
+   			.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+		cht.append("path")
+			.attr("id","chartpath")
+    		.datum(chartdata)
+   			.attr("class", "area")
+    		.attr("d", area);
+
+		cht.append("g")
+    		.attr("class", "x axis")
+    		.attr("transform", "translate(0," + iheight + ")")
+    		.call(xAxis);
+
+    	cht.append("text")
+    		.attr("id","chartlabel")
+    		.attr("class", "x-label")
+    		.attr("font-size",15)
+    		.attr("font-weight","bold")
+    		.attr("text-anchor", "end")
+    		.attr("x",iwidth + margin.left - 80)
+    		.attr("y",iheight + margin.top + 20)
+    		.text("BTC Exchange Rate*");
+
+		cht.append("g")
+			.attr("id","chartyaxis")
+    		.attr("class", "y axis")
+    		.call(yAxis);
+
+        cht.append("rect")
+        	.attr("id","marker")
+          	.attr("x",x(23)-2)
+          	.attr("y",0)
+          	.attr("width",4)
+          	.attr("height",iheight)
+          	.attr("style","fill:red; fill-opacity:0.5");
+
+        cht.append("line")
+        	.attr("id","linepos")
+        	.attr("x1",x(23)-2)
+        	.attr("y1",0)
+        	.attr("x2",x(23)-2)
+        	.attr("y2",iheight)
+        	.attr("style","stroke:gray")
+			.classed("hidden", true);
+
+        cht.append("circle")
+        	.attr("id","circlepos")
+        	.attr("cx",x(23)-2)
+        	.attr("cy",iheight)
+        	.attr("r",3)
+        	.attr("stroke","gray")
+        	.attr("fill","gray")
+			.classed("hidden", true);
+
+         var mkr = d3.select("#marker");
+         var pth = d3.select("#chartpath");
+         var lbl = d3.select("#chartlabel");
+         var axs = d3.select("#chartyaxis");
+         var lps = d3.select("#linepos");
+         var cps = d3.select("#circlepos");
+         var dat = document.getElementById("datettp");
+
+      var countries = topojson.object(world, world.objects.countries).geometries,
+          neighbors = topojson.neighbors(world, countries),
+          i = -1,
+          n = countries.length;
+
+      countries.forEach(function(d) { 
+          d.name = names.filter(function(n) { return d.id == n.id; })[0].name; 
+          d.currency = names.filter(function(n) { return d.id == n.id; })[0].currency; 
+          d.volume = (d.currency != 'OTH')?dataset.filter(function(n) { return selected_dataset == n.id; })[0][d.currency]:0;
+          });
+
+      function updateFill(selection, selected_dataset) {
+            selection.transition()
+                    .duration(700)
+                    .attr("fill",function(d, i) { return ((countries[i].currency == "OTH")?inactive_color:color(d.color = d.volume + 1 | 0)); })
+      }
+
+      var country = svg.selectAll(".country").data(countries);
+
+      country
+          .enter()
+          .insert("path")
+          .attr("class", "country")    
+          .attr("title", function(d,i) { return d.name; })
+          .attr("d", path)
+          .style("fill", function(d, i) { return (((countries[i].currency == "OTH") || (countries[i].volume == ''))?inactive_color:color(d.color = d.volume + 1 | 0)); });
+
+      //Show/hide tooltip
+      country
+          .on("mousemove", function(d,i) {
+              playButton.html("<img src='play_button.png'></img>");
+              var mouse = d3.mouse(svg.node()).map( function(d) { return parseInt(d); } );
+
+              tooltip
+                .classed("hidden", false)
+                .attr("style", "left:"+(mouse[0]+50)+"px;top:"+(mouse[1]+250)+"px")
+                .html(d.name + " [" + d.currency + "]")
+              })
+
+          .on("mouseout",  function(d,i) {
+              tooltip.classed("hidden", true)
+              })
+
+          .on("click", function(d,i) {
+          	if (d.currency != 'OTH') {
+          		chartnote.html("* BTC exchange rate shown is for " + d.name + " in " + d.currency + ".");
+
+          		chartdata = [];
+		   		xrdata.forEach(function(e) {
+		   			if (isNaN(parseFloat(e['BTC' + d.currency]))) yvalue = 0.0;
+   					else                                          yvalue = parseFloat(e['BTC' + d.currency]); 
+   					chartdata.push({ x: parseFloat(e.Index), y: yvalue, date: e.Date });
+	   				//chartdata.push({ x: parseFloat(e.Index), y: yvalue });
+   				});
+
+				y = d3.scale.linear()
+    				.domain([0, d3.max(chartdata, function(d) { return d.y; })])
+    				.range([iheight, 0]);
+
+				yAxis = d3.svg.axis()
+    				.scale(y)
+    				.orient("left");
+
+				area = d3.svg.area()
+    				.x(function(d) { return x(d.x); })
+    				.y0(iheight)
+    				.y1(function(d) { return y(d.y); });
+
+    			pth.datum(chartdata)
+    				.attr("d", area);
+    			lbl.text("BTC Exchange Rate (" + d.currency + ")*");
+    			axs.call(yAxis);
+    			mkr.attr("x",x(parseInt(selected_dataset)+23)-2);
+
+          		}});
+
+        dropDown.on("change", function() {
+            playButton.html("<img src='play_button.png'></img>");
+            var cy = svg.selectAll(".country").data(countries);          
+            selected_dataset = d3.event.target.value;
+            countries.forEach(function(d) { 
+                d.volume = (d.currency != 'OTH')?dataset.filter(function(n) { return selected_dataset == n.id; })[0][d.currency]:0;
+                });
+
+            cy.style("fill", function(d, i) { return (((countries[i].currency == "OTH") || (countries[i].volume == ''))?inactive_color:color(d.color = d.volume + 1 | 0)); });
+            subtitle.html("(Week of " + dataset.filter(function(n) { return selected_dataset == n.id; })[0]['Date'] + ")");
+
+            mkr.attr("x",x(parseInt(selected_dataset)+23)-2);
+
+        });
+
+        playButton
+          .on("mousemove", function(d,i) {
+            playButton.html("<img src='play_button_inverse.png'></img>");
+          });
+
+        playButton
+          .on("mouseout", function(d,i) {
+            playButton.html("<img src='play_button.png'></img>");
+          });
+
+        playButton.on("click", function() {
+            var cy = svg.selectAll(".country").data(countries);          
+            selected_dataset++;
+            dropDownHTML.options[selected_dataset-1].selected = true;
+            countries.forEach(function(d) { 
+                d.volume = (d.currency != 'OTH')?dataset.filter(function(n) { return selected_dataset == n.id; })[0][d.currency]:0;
+                });
+
+            cy.style("fill", function(d, i) { return (((countries[i].currency == "OTH") || (countries[i].volume == ''))?inactive_color:color(d.color = d.volume + 1 | 0)); });
+            subtitle.html("(Week of " + dataset.filter(function(n) { return selected_dataset == n.id; })[0]['Date'] + ")");
+            mkr.attr("x",x(parseInt(selected_dataset)+23)-2);
+            playButton.html("<img src='play_button_click.png'></img>");
+        });
+
+        chartbackground.on("mousemove", function(d,i) {
+        	var mouse = d3.mouse(svg.node()).map( function(d) { return parseInt(d); } );
+
+        	if (mouse[0] >= margin.left) {
+        		var day = Math.floor(xreverse(mouse[0] - margin.left));
+
+        		if ((day >= 24) && (day <= 241)) {
+        			lps.attr("x1",x(day)+2)
+			        	.attr("x2",x(day)+2)
+			       		.classed("hidden", false);
+			       	cps.attr("cx",x(day)+2)
+			       		.attr("cy",y(chartdata[day-1].y))
+			       		.classed("hidden", false);
+              		date_tooltip
+                		.classed("hidden", false)
+                		.attr("style", "left:"+(x(day) + chartbackgroundHTML.offsetLeft + 45)+"px; top:"+(chartbackgroundHTML.offsetTop)+"px")
+                		.html(chartdata[day-1].date);
+        		}
+        	}
+        });
+
+        chartbackground.on("mouseout", function(d,i) {
+        	lps.classed("hidden", true);
+        	cps.classed("hidden", true);
+        	date_tooltip.classed("hidden", true);
+        });
+
+        chartbackground.on("click", function() {
+        	var mouse = d3.mouse(svg.node()).map( function(d) { return parseInt(d); } );
+            var cy = svg.selectAll(".country").data(countries);
+
+        	if (mouse[0] >= margin.left) {
+        		var day = Math.floor(xreverse(mouse[0] - margin.left));
+
+        		if ((day >= 24) && (day <= 241)) {
+	        		selected_dataset = day - 23;
+
+    	    	    dropDownHTML.options[selected_dataset-1].selected = true;
+        	    	countries.forEach(function(d) { 
+            	    	d.volume = (d.currency != 'OTH')?dataset.filter(function(n) { return selected_dataset == n.id; })[0][d.currency]:0;
+                	});
+
+            		cy.style("fill", function(d, i) { return (((countries[i].currency == "OTH") || (countries[i].volume == ''))?inactive_color:color(d.color = d.volume + 1 | 0)); });
+            		subtitle.html("(Week of " + dataset.filter(function(n) { return selected_dataset == n.id; })[0]['Date'] + ")");
+            		mkr.attr("x",x(parseInt(selected_dataset)+23)-2);
+            	}
+
+        	}
+        });
+
+
+        
+      }
+
+    </script>
+  </body>
+</html>
