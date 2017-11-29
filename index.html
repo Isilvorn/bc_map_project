@@ -44,10 +44,17 @@
       h1 {}
         .h11 {
           color: #CC0000;
-          font-size: 36px;
+          font-size: 24px;
           font-family: 'Impact', monospace;
           text-align: center;
           }
+      h2 {}
+      	.h21 {
+          color: #CCCCCC;
+          font-size: 36px;
+          font-family: 'Helvetica';
+          text-align: center;
+      	}
       p {}
         .para2 { 
           font-size: 24px;
@@ -81,8 +88,9 @@
     </style>
   </head>
   <body>
-    <h1 class="h11">Solution web page for assignment #8</h1>
-    <p class="para5">For this assignment, I am using the same choropleth chart that I am developing for the final project and adding an additional chart off to the bottom that switches to the Bitcoin exchange rate in that country as a function of time.  This is similar to the implementation that I plan to use for the final project. I found <a href="https://www.mattlayman.com/2015/d3js-area-chart.html">this linked</a> tutorial to be very useful in creating the area chart.  This <a href="https://stackoverflow.com/questions/4431459/javascript-array-struct#4431496">linked explanation</a> of creating and using object structures in javascript also help me get past a roadblock.  See the exchange rate progression over the entire 241 weeks of data for a particular country by clicking on that country, and conversely, the choropleth time frame can be shifted by clicking on the exchange rate graph.</p>
+    <h1 class="h11">CS 725 Final Project</h1>
+    <hr style="width: 100%; height: 2px;">
+    <p class="para5">Bitcoin volume and exchange rate are clues indicating the level of adoption by various countries.  Viewed in context with headlines of note from that same time period can provide clues concerning why an adoption spike occurred when it did, if the spike was localized to that country or currency.  While global spikes are interesting with respect to a general rise in worldwide adoption, localized spikes are the particular interest area of this project.</p>
       <!-- dropdown -->
     <div style="margin-left: 40px">
       <select id="dropdown"></select>
@@ -91,6 +99,8 @@
     <hr style="width: 100%; height: 2px;">
     <h2 style="margin-left: 40px; font-size: 24px; font-weight: bold; color: #000000;">Relative Bitcoin Volume</h2>
     <h3 id="weekof" style="margin-left: 40px; font-size: 18px;"></h3>
+    <div id="stackedarea" style="width: 960px; height: 200px">
+    </div>
     <div id="map">
     </div>
     <div id="chart">
@@ -101,7 +111,7 @@
     <hr style="width: 100%; height: 2px;">
     <p class="para5">NOTE: Any country with insufficient activity in local currency-to-Bitcoin trading is grayed out, and is denoted by "Other" ("OTH") in the currency designation appearing beside the country name within the square brackets in the mouseover text.  For example, the US would be displayed as "United states [USD]" upon mouse-over. Select any time period from the drop-down or click the rightward facing triangle to step through each time step.</p>
     <hr style="width: 100%; height: 2px;">
-    <p class="para5">This map shows relative trading volume of Bitcoin in the currency of each region.  Gray is indicative of no data exceeding a minimum threshold of half of the historical average trading volume.  For instance, the average US Dollar trading volume over the entirety of the data is an average of $4.6 million per week.  The data is reflected on the map when the trading volume exceeds $2.3 million per week; from that point forward all data will be reflected on the map, even if it dips below $2.3 million in any given week.  This prevents the wild gyrations that occur during initial adoption from having an effect on the map.</p>
+    <p class="para5">This map shows relative trading volume of Bitcoin in the currency of each region.  Gray is indicative of no data exceeding a minimum threshold of one-quarter of the historical average trading volume.  For instance, the average US Dollar trading volume over the entirety of the data is an average of $4.6 million per week.  The data is reflected on the map when the trading volume exceeds $1.15 million per week; from that point forward all data will be reflected on the map, even if it dips below $2.3 million in any given week.  This prevents the wild gyrations that occur during initial adoption from having an effect on the map.</p>
     <p class="para5">Blue color is indicative of relatively low trading volume, while red denotes high trading volume.  A purple color shows a relatively average performance with respect to the previous few weeks.  The current trading volume is compared with a trailing 6 week average in order to calculate the relative performance.  The resultant numbers are dimensionless so that different currencies can be compared to one another.</p>
     <p class="para5">A notable insight that can be gained from stepping through the data is by noticing where the highest activity regions are when the red time marker is in close proximity to a spike or dip in the exchange rate.  The change in exchange volume in these regions is likely directly related to the change in exchange rate (note that the display for Bitcoin exchange rate can be shown for any individual country by clicking on it - the best proxy for an overall worldwide exchange rate is that of the US Dollar or Euro, which are typically not affected by local events).</p>
     <script src="js/d3.v3.min.js"></script>
