@@ -198,7 +198,7 @@
         .defer(d3.csv, "data/002_Contributions.csv")
         .await(ready);
 
-      function ready(error, world, names, dataset, xrdata) {
+      function ready(error, world, names, dataset, xrdata, sadata) {
 
     	var yvalue;
    		var chartdata = [];
@@ -206,7 +206,13 @@
    			if (isNaN(parseFloat(d.BTCUSD))) yvalue = 0.0;
    			else                             yvalue = parseFloat(d.BTCUSD); 
    			chartdata.push({ x: parseFloat(d.Index), y: yvalue, date: d.Date });
-   			//chartdata.push({ x: Date(d.Date), y: parseFloat(d.BTCUSD) });
+   		});
+
+   		var sareadata = [];
+   		sadata.forEach(function(d) {
+   			if (isNaN(parseFloat(d.USD))) yvalue = 0.0;
+   			else                          yvalue = parseFloat(d.USD); 
+   			sareadata.push({ x: parseFloat(d.Index), y: yvalue, date: d.Date });
    		});
 
 
@@ -290,6 +296,89 @@
 
         cht.append("circle")
         	.attr("id","circlepos")
+        	.attr("cx",x(23)-2)
+        	.attr("cy",iheight)
+        	.attr("r",3)
+        	.attr("stroke","gray")
+        	.attr("fill","gray")
+			.classed("hidden", true);
+
+		var sax = d3.scale.linear()
+    		.domain([0, d3.max(sareadata, function(d) { return d.x; })])
+    		.range([0, iwidth]);
+
+    	var saxreverse = d3.scale.linear()
+    		.domain([0, iwidth])
+    		.range([0, d3.max(sareadata, function(d) { return d.x; })]);
+
+		var say = d3.scale.linear()
+    		.domain([0, d3.max(sareadata, function(d) { return d.y; })])
+    		.range([iheight, 0]);
+
+		var saxAxis = d3.svg.axis()
+    		.scale(sax)
+    		.orient("bottom");
+
+		var sayAxis = d3.svg.axis()
+    		.scale(say)
+    		.orient("left");
+
+		var sarea = d3.svg.area()
+    		.x(function(d) { return sax(d.x); })
+    		.y0(iheight)
+    		.y1(function(d) { return say(d.y); });
+
+		var sarea = d3.select("svg#area")
+    		.attr("width", iwidth + margin.left + margin.right)
+    		.attr("height", iheight + margin.top + margin.bottom)
+ 			.append("g")
+   			.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+		sarea.append("path")
+			.attr("id","path1")
+    		.datum(sareadata)
+   			.attr("class", "area")
+    		.attr("d", area);
+
+		sarea.append("g")
+    		.attr("class", "x axis")
+    		.attr("transform", "translate(0," + iheight + ")")
+    		.call(saxAxis);
+
+    	sarea.append("text")
+    		.attr("id","sarealabel")
+    		.attr("class", "x-label")
+    		.attr("font-size",15)
+    		.attr("font-weight","bold")
+    		.attr("text-anchor", "end")
+    		.attr("x",iwidth + margin.left - 120)
+    		.attr("y",iheight + margin.top + 20)
+    		.text("Relative BTC Volume Contribution*");
+
+		sarea.append("g")
+			.attr("id","sareayaxis")
+    		.attr("class", "y axis")
+    		.call(sayAxis);
+
+        sarea.append("rect")
+        	.attr("id","topmarker")
+          	.attr("x",sax(23)-2)
+          	.attr("y",0)
+          	.attr("width",4)
+          	.attr("height",iheight)
+          	.attr("style","fill:red; fill-opacity:0.5");
+
+        sarea.append("line")
+        	.attr("id","toplinepos")
+        	.attr("x1",x(23)-2)
+        	.attr("y1",0)
+        	.attr("x2",x(23)-2)
+        	.attr("y2",iheight)
+        	.attr("style","stroke:gray")
+			.classed("hidden", true);
+
+        sarea.append("circle")
+        	.attr("id","topcirclepos")
         	.attr("cx",x(23)-2)
         	.attr("cy",iheight)
         	.attr("r",3)
