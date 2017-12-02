@@ -496,6 +496,7 @@
             subtitle.html("(Week of " + dataset.filter(function(n) { return selected_dataset == n.id; })[0]['Date'] + ")");
 
             mkr.attr("x",x(parseInt(selected_dataset)+23)-2);
+            sa_mkr.attr("x",sax(parseInt(selected_dataset)+23)-2);
 
         });
 
