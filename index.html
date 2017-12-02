@@ -340,7 +340,7 @@
 			.attr("id","path1")
     		.datum(sareadata)
    			.attr("class", "area")
-    		.attr("d", area);
+    		.attr("d", sarea);
 
 		sarea.append("g")
     		.attr("class", "x axis")
@@ -353,7 +353,7 @@
     		.attr("font-size",15)
     		.attr("font-weight","bold")
     		.attr("text-anchor", "end")
-    		.attr("x",iwidth + margin.left - 120)
+    		.attr("x",iwidth + margin.left - 110)
     		.attr("y",iheight + margin.top + 20)
     		.text("Relative BTC Volume Contribution*");
 
@@ -395,6 +395,12 @@
          var lps = d3.select("#linepos");
          var cps = d3.select("#circlepos");
          var dat = document.getElementById("datettp");
+         var sa_mkr = d3.select("#topmarker");
+         var sa_pth = d3.select("#path1");
+         var sa_lbl = d3.select("#sarealabel");
+         var sa_axs = d3.select("#sareayaxis");
+         var sa_lps = d3.select("#toplinepos");
+         var sa_cps = d3.select("#topcirclepos");
 
       var countries = topojson.object(world, world.objects.countries).geometries,
           neighbors = topojson.neighbors(world, countries),
@@ -506,7 +512,7 @@
                 });
 
             cy.style("fill", function(d, i) { return (((countries[i].currency == "OTH") || (countries[i].volume == ''))?inactive_color:color(d.color = d.volume + 1 | 0)); });
-            subtitle.html("(Week of " + dataset.filter(function(n) { return selected_dataset == n.id; })[0]['Date'] + ")");
+            //subtitle.html("(Week of " + dataset.filter(function(n) { return selected_dataset == n.id; })[0]['Date'] + ")");
             mkr.attr("x",x(parseInt(selected_dataset)+23)-2);
             playButton.html("<img src='play_button_click.png'></img>");
         });
