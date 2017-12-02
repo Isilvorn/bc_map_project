@@ -195,6 +195,7 @@
         .defer(d3.csv, "data/world-country-names.csv")
         .defer(d3.csv, "data/001_Normalized_Data_Set.csv")
         .defer(d3.csv, "data/xrdata.csv")
+        .defer(d3.csv, "data/002_Contributions.csv")
         .await(ready);
 
       function ready(error, world, names, dataset, xrdata) {
