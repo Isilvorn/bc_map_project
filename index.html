@@ -367,9 +367,9 @@
     		.attr("font-size",15)
     		.attr("font-weight","bold")
     		.attr("text-anchor", "end")
-    		.attr("x",iwidth + margin.left - 110)
+    		.attr("x",iwidth + margin.left - 100)
     		.attr("y",iheight + margin.top + 20)
-    		.text("Relative BTC Volume Contribution*");
+    		.text("Relative BTC Volume Contribution");
 
 		sarea.append("g")
 			.attr("id","sareayaxis")
@@ -521,7 +521,7 @@
 
             sa_mkr.attr("x",sax(parseInt(selected_dataset)+23)-2);
             mkr.attr("x",x(parseInt(selected_dataset)+23)-2);
-            
+
             playButton.html("<img src='play_button_click.png'></img>");
         });
 
