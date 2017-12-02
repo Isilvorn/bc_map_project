@@ -328,7 +328,8 @@
     		.range([0, d3.max(sareadata, function(d) { return d.x; })]);
 
 		var say = d3.scale.linear()
-    		.domain([0, d3.max(sareadata, function(d) { return d.y; })])
+    		//.domain([0, d3.max(sareadata, function(d) { return d.y; })])
+    		.domain([0, 1])
     		.range([iheight, 0]);
 
 		var saxAxis = d3.svg.axis()
@@ -356,10 +357,10 @@
    			.attr("class", "area")
     		.attr("d", sarea_cht);
 
-		sarea.append("g")
-    		.attr("class", "x axis")
-    		.attr("transform", "translate(0," + iheight + ")")
-    		.call(saxAxis);
+		//sarea.append("g")
+    	//	.attr("class", "x axis")
+    	//	.attr("transform", "translate(0," + iheight + ")")
+    	//	.call(saxAxis);
 
     	sarea.append("text")
     		.attr("id","sarealabel")
