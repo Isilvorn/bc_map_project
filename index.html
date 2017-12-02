@@ -183,6 +183,9 @@
                           .attr("class", "tooltip")
                           .classed("hidden", true);
 
+      var mapbackground = d3.select("#map");
+      var mapbackgroundHTML = document.getElementById("map");
+
       var chartbackground = d3.select("#chart");
       var chartbackgroundHTML = document.getElementById("chart");
 
@@ -389,14 +392,6 @@
         	.attr("style","stroke:gray")
 			.classed("hidden", true);
 
-        sarea.append("circle")
-        	.attr("id","topcirclepos")
-        	.attr("cx",x(23)-2)
-        	.attr("cy",iheight)
-        	.attr("r",3)
-        	.attr("stroke","gray")
-        	.attr("fill","gray")
-			.classed("hidden", true);
 
          var mkr = d3.select("#marker");
          var pth = d3.select("#chartpath");
@@ -410,7 +405,6 @@
          var sa_lbl = d3.select("#sarealabel");
          var sa_axs = d3.select("#sareayaxis");
          var sa_lps = d3.select("#toplinepos");
-         var sa_cps = d3.select("#topcirclepos");
          var ttp = document.getElementById("topttp");
 
       var countries = topojson.object(world, world.objects.countries).geometries,
@@ -448,7 +442,7 @@
 
               tooltip
                 .classed("hidden", false)
-                .attr("style", "left:"+(mouse[0]+50)+"px;top:"+(mouse[1]+250)+"px")
+                .attr("style", "left:"+(mouse[0]+mapbackgroundHTML.offsetLeft)+"px;top:"+(mouse[1]+mapbackgroundHTML.offsetTop)+"px")
                 .html(d.name + " [" + d.currency + "]")
               })
 
@@ -523,7 +517,6 @@
                 });
 
             cy.style("fill", function(d, i) { return (((countries[i].currency == "OTH") || (countries[i].volume == ''))?inactive_color:color(d.color = d.volume + 1 | 0)); });
-            //subtitle.html("(Week of " + dataset.filter(function(n) { return selected_dataset == n.id; })[0]['Date'] + ")");
             mkr.attr("x",x(parseInt(selected_dataset)+23)-2);
             playButton.html("<img src='play_button_click.png'></img>");
         });
@@ -559,9 +552,6 @@
         			sa_lps.attr("x1",sax(day)+2)
 			        	.attr("x2",sax(day)+2)
 			       		.classed("hidden", false);
-			       	sa_cps.attr("cx",sax(day)+2)
-			       		.attr("cy",say(sareadata[day-1].y))
-			       		.classed("hidden", false);
               		top_tooltip
                 		.classed("hidden", false)
                 		.attr("style", "left:"+(sax(day) + sareabackgroundHTML.offsetLeft + 45)+"px; top:"+(sareabackgroundHTML.offsetTop)+"px")
@@ -592,7 +582,6 @@
                 	});
 
             		cy.style("fill", function(d, i) { return (((countries[i].currency == "OTH") || (countries[i].volume == ''))?inactive_color:color(d.color = d.volume + 1 | 0)); });
-            		subtitle.html("(Week of " + dataset.filter(function(n) { return selected_dataset == n.id; })[0]['Date'] + ")");
             		mkr.attr("x",x(parseInt(selected_dataset)+23)-2);
             	}
 
