@@ -588,6 +588,32 @@
                 	});
 
             		cy.style("fill", function(d, i) { return (((countries[i].currency == "OTH") || (countries[i].volume == ''))?inactive_color:color(d.color = d.volume + 1 | 0)); });
+            		
+            		sa_mkr.attr("x",sax(parseInt(selected_dataset)+23)-2);
+            		mkr.attr("x",x(parseInt(selected_dataset)+23)-2);
+            	}
+
+        	}
+        });
+
+        sareabackground.on("click", function() {
+        	var mouse = d3.mouse(svg.node()).map( function(d) { return parseInt(d); } );
+            var cy = svg.selectAll(".country").data(countries);
+
+        	if (mouse[0] >= margin.left) {
+        		var day = Math.floor(saxreverse(mouse[0] - margin.left));
+
+        		if ((day >= 24) && (day <= 241)) {
+	        		selected_dataset = day - 23;
+
+    	    	    dropDownHTML.options[selected_dataset-1].selected = true;
+        	    	countries.forEach(function(d) { 
+            	    	d.volume = (d.currency != 'OTH')?dataset.filter(function(n) { return selected_dataset == n.id; })[0][d.currency]:0;
+                	});
+
+            		cy.style("fill", function(d, i) { return (((countries[i].currency == "OTH") || (countries[i].volume == ''))?inactive_color:color(d.color = d.volume + 1 | 0)); });
+
+            		sa_mkr.attr("x",sax(parseInt(selected_dataset)+23)-2);
             		mkr.attr("x",x(parseInt(selected_dataset)+23)-2);
             	}
 
