@@ -180,8 +180,9 @@
 
       var tooltip = d3.select("#map").append("div")
             				.attr("id","ttp")
-                          .attr("class", "tooltip")
-                          .classed("hidden", true);
+                          	.attr("class", "tooltip")
+                          	.attr("style","text-anchor:middle")
+                          	.classed("hidden", true);
 
       var mapbackground = d3.select("#map");
       var mapbackgroundHTML = document.getElementById("map");
@@ -442,7 +443,7 @@
 
               tooltip
                 .classed("hidden", false)
-                .attr("style", "left:"+(mouse[0]+mapbackgroundHTML.offsetLeft)+"px;top:"+(mouse[1]+mapbackgroundHTML.offsetTop)+"px")
+                .attr("style", "left:"+(mouse[0]+mapbackgroundHTML.offsetLeft)+"px;top:"+(mouse[1]+mapbackgroundHTML.offsetTop-20)+"px")
                 .html(d.name + " [" + d.currency + "]")
               })
 
@@ -564,6 +565,11 @@
         	lps.classed("hidden", true);
         	cps.classed("hidden", true);
         	date_tooltip.classed("hidden", true);
+        });
+
+        sareabackground.on("mouseout", function(d,i) {
+        	sa_lps.classed("hidden", true);
+        	top_tooltip.classed("hidden", true);
         });
 
         chartbackground.on("click", function() {
