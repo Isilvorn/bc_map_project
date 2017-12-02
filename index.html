@@ -179,17 +179,27 @@
 
 
       var tooltip = d3.select("#map").append("div")
-      					  .attr("id","datettp")
+            				.attr("id","ttp")
                           .attr("class", "tooltip")
                           .classed("hidden", true);
 
       var chartbackground = d3.select("#chart");
       var chartbackgroundHTML = document.getElementById("chart");
 
+      var sareabackground = d3.select("#contribution");
+      var sareabackgroundHTML = document.getElementById("contribution");
+
       var date_tooltip = d3.select("#chart").append("div")
-                          .attr("class", "tooltip")
-                          .attr("style","text-anchor:middle")
-                          .classed("hidden", true);
+            				.attr("id","datettp")
+                          	.attr("class", "tooltip")
+                          	.attr("style","text-anchor:middle")
+                          	.classed("hidden", true);
+
+      var top_tooltip = d3.select("#contribution").append("div")
+            				.attr("id","topttp")
+                          	.attr("class", "tooltip")
+                          	.attr("style","text-anchor:middle")
+                          	.classed("hidden", true);
 
 
       queue()
@@ -401,6 +411,7 @@
          var sa_axs = d3.select("#sareayaxis");
          var sa_lps = d3.select("#toplinepos");
          var sa_cps = d3.select("#topcirclepos");
+         var ttp = document.getElementById("topttp");
 
       var countries = topojson.object(world, world.objects.countries).geometries,
           neighbors = topojson.neighbors(world, countries),
@@ -534,6 +545,27 @@
                 		.classed("hidden", false)
                 		.attr("style", "left:"+(x(day) + chartbackgroundHTML.offsetLeft + 45)+"px; top:"+(chartbackgroundHTML.offsetTop)+"px")
                 		.html(chartdata[day-1].date);
+        		}
+        	}
+        });
+
+        sareabackground.on("mousemove", function(d,i) {
+        	var mouse = d3.mouse(svg.node()).map( function(d) { return parseInt(d); } );
+
+        	if (mouse[0] >= margin.left) {
+        		var day = Math.floor(saxreverse(mouse[0] - margin.left));
+
+        		if ((day >= 24) && (day <= 241)) {
+        			sa_lps.attr("x1",sax(day)+2)
+			        	.attr("x2",sax(day)+2)
+			       		.classed("hidden", false);
+			       	sa_cps.attr("cx",sax(day)+2)
+			       		.attr("cy",say(sareadata[day-1].y))
+			       		.classed("hidden", false);
+              		top_tooltip
+                		.classed("hidden", false)
+                		.attr("style", "left:"+(sax(day) + sareabackgroundHTML.offsetLeft + 45)+"px; top:"+(sareabackgroundHTML.offsetTop)+"px")
+                		.html(sareadata[day-1].date);
         		}
         	}
         });
