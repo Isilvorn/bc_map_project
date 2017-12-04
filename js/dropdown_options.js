@@ -1,4 +1,5 @@
 var dropdown_options = [
+{ value: "0", text: "Week of Aug-10-2013" },
 { value: "1", text: "Week of Aug-17-2013" },
 { value: "2", text: "Week of Aug-24-2013" },
 { value: "3", text: "Week of Aug-31-2013" },
