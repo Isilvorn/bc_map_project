@@ -513,7 +513,7 @@
         playButton.on("click", function() {
             var cy = svg.selectAll(".country").data(countries);          
             selected_dataset++;
-            dropDownHTML.options[selected_dataset-1].selected = true;
+            dropDownHTML.options[selected_dataset].selected = true;
             countries.forEach(function(d) { 
                 d.volume = (d.currency != 'OTH')?dataset.filter(function(n) { return selected_dataset == n.id; })[0][d.currency]:0;
                 });
@@ -586,7 +586,7 @@
         		if ((day >= 23) && (day <= 241)) {
 	        		selected_dataset = day - 23;
 
-    	    	    dropDownHTML.options[selected_dataset-1].selected = true;
+    	    	    dropDownHTML.options[selected_dataset].selected = true;
         	    	countries.forEach(function(d) { 
             	    	d.volume = (d.currency != 'OTH')?dataset.filter(function(n) { return selected_dataset == n.id; })[0][d.currency]:0;
                 	});
@@ -610,7 +610,7 @@
         		if ((day >= 23) && (day <= 241)) {
 	        		selected_dataset = day - 23;
 
-    	    	    dropDownHTML.options[selected_dataset-1].selected = true;
+    	    	    dropDownHTML.options[selected_dataset].selected = true;
         	    	countries.forEach(function(d) { 
             	    	d.volume = (d.currency != 'OTH')?dataset.filter(function(n) { return selected_dataset == n.id; })[0][d.currency]:0;
                 	});
