@@ -226,8 +226,8 @@
 
    		var sareadata = [];
    		sadata.forEach(function(d) {
-   			if (isNaN(parseFloat(d.USD))) yvalue = 0.0;
-   			else                          yvalue = parseFloat(d.USD); 
+   			if (isNaN(parseFloat(d.NAM))) yvalue = 0.0;
+   			else                          yvalue = parseFloat(d.NAM); 
    			sareadata.push({ x: parseFloat(d.Index), y: yvalue, date: d.Date });
    		});
 
