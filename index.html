@@ -229,35 +229,35 @@
    			// North America
    			if (isNaN(parseFloat(d.NAM))) yvalue = 0.0;
    			else                          yvalue = parseFloat(d.NAM); 
-   			sareadata.push({ x: parseFloat(d.Index), NAM: yvalue, date: d.Date });
+   			sareadata.push({ x: parseFloat(d.Index), y: yvalue, date: d.Date });
    			// South America
-   			if (isNaN(parseFloat(d.SAM))) yvalue = 0.0;
-   			else                          yvalue = parseFloat(d.SAM); 
-   			sareadata.push({ x: parseFloat(d.Index), SAM: yvalue, date: d.Date });
+   			//if (isNaN(parseFloat(d.SAM))) yvalue = 0.0;
+   			//else                          yvalue = parseFloat(d.SAM); 
+   			//sareadata.push({ x: parseFloat(d.Index), SAM: yvalue, date: d.Date });
    			// Europe and Great Britain
    			//if (isNaN(parseFloat(d.EURGB))) yvalue = 0.0;
    			//else                          yvalue = parseFloat(d.EURGB); 
    			//sareadata.push({ x: parseFloat(d.Index), EURGB: yvalue, date: d.Date });
    			// China
-   			if (isNaN(parseFloat(d.CHINA))) yvalue = 0.0;
-   			else                          yvalue = parseFloat(d.CHINA); 
-   			sareadata.push({ x: parseFloat(d.Index), CHINA: yvalue, date: d.Date });
+   			//if (isNaN(parseFloat(d.CHINA))) yvalue = 0.0;
+   			//else                          yvalue = parseFloat(d.CHINA); 
+   			//sareadata.push({ x: parseFloat(d.Index), CHINA: yvalue, date: d.Date });
    			// Russia
-   			if (isNaN(parseFloat(d.RUS))) yvalue = 0.0;
-   			else                          yvalue = parseFloat(d.RUS); 
-   			sareadata.push({ x: parseFloat(d.Index), RUS: yvalue, date: d.Date });
+   			//if (isNaN(parseFloat(d.RUS))) yvalue = 0.0;
+   			//else                          yvalue = parseFloat(d.RUS); 
+   			//sareadata.push({ x: parseFloat(d.Index), RUS: yvalue, date: d.Date });
    			// Asia
-   			if (isNaN(parseFloat(d.ASIA))) yvalue = 0.0;
-   			else                          yvalue = parseFloat(d.ASIA); 
-   			sareadata.push({ x: parseFloat(d.Index), ASIA: yvalue, date: d.Date });
+   			//if (isNaN(parseFloat(d.ASIA))) yvalue = 0.0;
+   			//else                          yvalue = parseFloat(d.ASIA); 
+   			//sareadata.push({ x: parseFloat(d.Index), ASIA: yvalue, date: d.Date });
    			// Africa
-   			if (isNaN(parseFloat(d.AFR))) yvalue = 0.0;
-   			else                          yvalue = parseFloat(d.AFR); 
-   			sareadata.push({ x: parseFloat(d.Index), AFR: yvalue, date: d.Date });
+   			//if (isNaN(parseFloat(d.AFR))) yvalue = 0.0;
+   			//else                          yvalue = parseFloat(d.AFR); 
+   			//sareadata.push({ x: parseFloat(d.Index), AFR: yvalue, date: d.Date });
    			// All other remaining
-   			if (isNaN(parseFloat(d.OTHER))) yvalue = 0.0;
-   			else                          yvalue = parseFloat(d.OTHER); 
-   			sareadata.push({ x: parseFloat(d.Index), OTHER: yvalue, date: d.Date });
+   			//if (isNaN(parseFloat(d.OTHER))) yvalue = 0.0;
+   			//else                          yvalue = parseFloat(d.OTHER); 
+   			//sareadata.push({ x: parseFloat(d.Index), OTHER: yvalue, date: d.Date });
    		});
 
 
@@ -371,7 +371,7 @@
 		var sarea_cht = d3.svg.area()
     		.x(function(d) { return sax(d.x); })
     		.y0(iheight)
-    		.y1(function(d) { return say(d.NAM); });
+    		.y1(function(d) { return say(d.y); });
 
 		var sarea = d3.select("svg#stackedarea")
     		.attr("width", iwidth + margin.left + margin.right)
