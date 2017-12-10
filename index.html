@@ -216,7 +216,7 @@
 
       function ready(error, world, names, dataset, xrdata, sadata) {
 
-    	var yvalue;
+    	var yvalue,y1,y2,y3,y4,y5,y6,y7,y8;
    		var chartdata = [];
    		xrdata.forEach(function(d) {
    			if (isNaN(parseFloat(d.BTCUSD))) yvalue = 0.0;
@@ -227,37 +227,30 @@
    		var sareadata = [];
    		sadata.forEach(function(d) {
    			// North America
-   			if (isNaN(parseFloat(d.NAM))) yvalue = 0.0;
-   			else                          yvalue = parseFloat(d.NAM); 
-   			sareadata.push({ x: parseFloat(d.Index), y1: yvalue, date: d.Date });
+   			if (isNaN(parseFloat(d.NAM)))   y1 = 0.0;
+   			else                            y1 = parseFloat(d.NAM); 
    			// South America
-   			if (isNaN(parseFloat(d.SAM))) yvalue = 0.0;
-   			else                          yvalue = parseFloat(d.SAM); 
-   			sareadata.push({ x: parseFloat(d.Index), y2: yvalue, date: d.Date });
+   			if (isNaN(parseFloat(d.SAM)))   y2 = 0.0;
+   			else                            y2 = parseFloat(d.SAM); 
    			// Europe and Great Britain
-   			if (isNaN(parseFloat(d.EURGB))) yvalue = 0.0;
-   			else                          yvalue = parseFloat(d.EURGB); 
-   			sareadata.push({ x: parseFloat(d.Index), y3: yvalue, date: d.Date });
+   			//if (isNaN(parseFloat(d.EURGB))) y3 = 0.0;
+   			//else                            y3 = parseFloat(d.EURGB); 
    			// China
-   			if (isNaN(parseFloat(d.CHINA))) yvalue = 0.0;
-   			else                          yvalue = parseFloat(d.CHINA); 
-   			sareadata.push({ x: parseFloat(d.Index), y4: yvalue, date: d.Date });
+   			if (isNaN(parseFloat(d.CHINA))) y4 = 0.0;
+   			else                            y4 = parseFloat(d.CHINA); 
    			// Russia
-   			if (isNaN(parseFloat(d.RUS))) yvalue = 0.0;
-   			else                          yvalue = parseFloat(d.RUS); 
-   			sareadata.push({ x: parseFloat(d.Index), y5: yvalue, date: d.Date });
+   			if (isNaN(parseFloat(d.RUS)))   y5 = 0.0;
+   			else                            y5 = parseFloat(d.RUS); 
    			// Asia
-   			if (isNaN(parseFloat(d.ASIA))) yvalue = 0.0;
-   			else                          yvalue = parseFloat(d.ASIA); 
-   			sareadata.push({ x: parseFloat(d.Index), y6: yvalue, date: d.Date });
+   			if (isNaN(parseFloat(d.ASIA)))  y6 = 0.0;
+   			else                            y6 = parseFloat(d.ASIA); 
    			// Africa
-   			if (isNaN(parseFloat(d.AFR))) yvalue = 0.0;
-   			else                          yvalue = parseFloat(d.AFR); 
-   			sareadata.push({ x: parseFloat(d.Index), y7: yvalue, date: d.Date });
+   			if (isNaN(parseFloat(d.AFR)))   y7 = 0.0;
+   			else                            y7 = parseFloat(d.AFR);
    			// All other remaining
-   			if (isNaN(parseFloat(d.OTHER))) yvalue = 0.0;
-   			else                          yvalue = parseFloat(d.OTHER); 
-   			sareadata.push({ x: parseFloat(d.Index), y8: yvalue, date: d.Date });
+   			if (isNaN(parseFloat(d.OTHER))) y8 = 0.0;
+   			else                            y8 = parseFloat(d.OTHER); 
+   			sareadata.push({ x: parseFloat(d.Index), y1: y1, date: d.Date });
    		});
 
 
