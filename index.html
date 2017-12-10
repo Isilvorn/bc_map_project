@@ -369,7 +369,7 @@
 		var sarea_cht2 = d3.svg.area()
     		.x(function(d) { return sax(d.x); })
     		.y0(iheight)
-    		.y1(function(d) { return say(d.y2); });
+    		.y1(function(d) { return say(d.y2 + d.y1); });
 
 		var sarea = d3.select("svg#stackedarea")
     		.attr("width", iwidth + margin.left + margin.right)
@@ -382,14 +382,14 @@
     		.datum(sareadata)
    			.attr("class", "area")
     		.attr("d", sarea_cht2)
-    		.style("fill","black");
+    		.style("fill","green");
 
-		//sarea.append("path")
-		//	.attr("id","path1")
-    	//	.datum(sareadata)
-   		//	.attr("class", "area")
-    	//	.attr("d", sarea_cht1)
-    	//	.attr("fill","blue");
+		sarea.append("path")
+			.attr("id","path1")
+    		.datum(sareadata)
+   			.attr("class", "area")
+    		.attr("d", sarea_cht1)
+    		.style("fill","blue");
 
 		//sarea.append("g")
     	//	.attr("class", "x axis")
