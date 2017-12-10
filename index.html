@@ -366,6 +366,36 @@
     		.y0(iheight)
     		.y1(function(d) { return say(d.y1); });
 
+		var sarea_cht8 = d3.svg.area()
+    		.x(function(d) { return sax(d.x); })
+    		.y0(iheight)
+    		.y1(function(d) { return say(d.y8 + d.y7 + d.y6 + d.y5 + d.y4 + d.y3 + d.y2 + d.y1); });
+
+		var sarea_cht7 = d3.svg.area()
+    		.x(function(d) { return sax(d.x); })
+    		.y0(iheight)
+    		.y1(function(d) { return say(d.y7 + d.y6 + d.y5 + d.y4 + d.y3 + d.y2 + d.y1); });
+
+		var sarea_cht6 = d3.svg.area()
+    		.x(function(d) { return sax(d.x); })
+    		.y0(iheight)
+    		.y1(function(d) { return say(d.y6 + d.y5 + d.y4 + d.y3 + d.y2 + d.y1); });
+
+		var sarea_cht5 = d3.svg.area()
+    		.x(function(d) { return sax(d.x); })
+    		.y0(iheight)
+    		.y1(function(d) { return say(d.y5 + d.y4 + d.y3 + d.y2 + d.y1); });
+
+		var sarea_cht4 = d3.svg.area()
+    		.x(function(d) { return sax(d.x); })
+    		.y0(iheight)
+    		.y1(function(d) { return say(d.y4 + d.y3 + d.y2 + d.y1); });
+
+		var sarea_cht3 = d3.svg.area()
+    		.x(function(d) { return sax(d.x); })
+    		.y0(iheight)
+    		.y1(function(d) { return say(d.y3 + d.y2 + d.y1); });
+
 		var sarea_cht2 = d3.svg.area()
     		.x(function(d) { return sax(d.x); })
     		.y0(iheight)
@@ -376,6 +406,48 @@
     		.attr("height", iheight + margin.top + margin.bottom)
  			.append("g")
    			.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+		sarea.append("path")
+			.attr("id","path2")
+    		.datum(sareadata)
+   			.attr("class", "area")
+    		.attr("d", sarea_cht8)
+    		.style("fill","gray");
+
+		sarea.append("path")
+			.attr("id","path2")
+    		.datum(sareadata)
+   			.attr("class", "area")
+    		.attr("d", sarea_cht7)
+    		.style("fill","yellow");
+
+		sarea.append("path")
+			.attr("id","path2")
+    		.datum(sareadata)
+   			.attr("class", "area")
+    		.attr("d", sarea_cht6)
+    		.style("fill","orange");
+
+		sarea.append("path")
+			.attr("id","path2")
+    		.datum(sareadata)
+   			.attr("class", "area")
+    		.attr("d", sarea_cht5)
+    		.style("fill","black");
+
+		sarea.append("path")
+			.attr("id","path2")
+    		.datum(sareadata)
+   			.attr("class", "area")
+    		.attr("d", sarea_cht4)
+    		.style("fill","red");
+
+		sarea.append("path")
+			.attr("id","path2")
+    		.datum(sareadata)
+   			.attr("class", "area")
+    		.attr("d", sarea_cht3)
+    		.style("fill","purple");
 
 		sarea.append("path")
 			.attr("id","path2")
