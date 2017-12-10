@@ -229,7 +229,7 @@
    			// North America
    			if (isNaN(parseFloat(d.NAM))) yvalue = 0.0;
    			else                          yvalue = parseFloat(d.NAM); 
-   			sareadata.push({ x: parseFloat(d.Index), y: yvalue, date: d.Date });
+   			sareadata.push({ x: parseFloat(d.Index), y1: yvalue, date: d.Date });
    			// South America
    			//if (isNaN(parseFloat(d.SAM))) yvalue = 0.0;
    			//else                          yvalue = parseFloat(d.SAM); 
@@ -371,7 +371,7 @@
 		var sarea_cht = d3.svg.area()
     		.x(function(d) { return sax(d.x); })
     		.y0(iheight)
-    		.y1(function(d) { return say(d.y); });
+    		.y1(function(d) { return say(d.y1); });
 
 		var sarea = d3.select("svg#stackedarea")
     		.attr("width", iwidth + margin.left + margin.right)
