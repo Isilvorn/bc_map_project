@@ -369,7 +369,7 @@
 		var sarea_cht2 = d3.svg.area()
     		.x(function(d) { return sax(d.x); })
     		.y0(iheight)
-    		.y1(function(d) { return say(d.y2 + d.y1); });
+    		.y1(function(d) { return say(d.y2); });
 
 		var sarea = d3.select("svg#stackedarea")
     		.attr("width", iwidth + margin.left + margin.right)
