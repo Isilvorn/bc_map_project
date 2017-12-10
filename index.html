@@ -361,7 +361,7 @@
     		.scale(say)
     		.orient("left");
 
-		var sarea_cht = d3.svg.area()
+		var sarea_cht1 = d3.svg.area()
     		.x(function(d) { return sax(d.x); })
     		.y0(iheight)
     		.y1(function(d) { return say(d.y1); });
@@ -376,7 +376,7 @@
 			.attr("id","path1")
     		.datum(sareadata)
    			.attr("class", "area")
-    		.attr("d", sarea_cht);
+    		.attr("d", sarea_cht1);
 
 		//sarea.append("g")
     	//	.attr("class", "x axis")
