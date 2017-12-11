@@ -551,7 +551,7 @@
       countries.forEach(function(d) { 
           d.name = names.filter(function(n) { return d.id == n.id; })[0].name; 
           d.currency = names.filter(function(n) { return d.id == n.id; })[0].currency; 
-          d.volume = (d.currency != 'OTH')?dataset.filter(function(n) { return selected_dataset == n.id; })[0][d.currency]:0;
+          d.volume = (d.currency != 'OTH')?dataset.filter(function(n) { return selected_dataset == n.Index; })[0][d.currency]:0;
           });
 
       function updateFill(selection, selected_dataset) {
@@ -637,7 +637,7 @@
             var cy = svg.selectAll(".country").data(countries);          
             selected_dataset = d3.event.target.value;
             countries.forEach(function(d) { 
-                d.volume = (d.currency != 'OTH')?dataset.filter(function(n) { return selected_dataset == n.id; })[0][d.currency]:0;
+                d.volume = (d.currency != 'OTH')?dataset.filter(function(n) { return selected_dataset == n.Index; })[0][d.currency]:0;
                 });
 
             cy.style("fill", function(d, i) { return (((countries[i].currency == "OTH") || (countries[i].volume == ''))?inactive_color:color(d.color = d.volume )); });
@@ -662,7 +662,7 @@
             selected_dataset++;
             dropDownHTML.options[selected_dataset].selected = true;
             countries.forEach(function(d) { 
-                d.volume = (d.currency != 'OTH')?dataset.filter(function(n) { return selected_dataset == n.id; })[0][d.currency]:0;
+                d.volume = (d.currency != 'OTH')?dataset.filter(function(n) { return selected_dataset == n.Index; })[0][d.currency]:0;
                 });
 
             cy.style("fill", function(d, i) { return (((countries[i].currency == "OTH") || (countries[i].volume == ''))?inactive_color:color(d.color = d.volume + 1 | 0)); });
@@ -735,7 +735,7 @@
 
     	    	    dropDownHTML.options[selected_dataset].selected = true;
         	    	countries.forEach(function(d) { 
-            	    	d.volume = (d.currency != 'OTH')?dataset.filter(function(n) { return selected_dataset == n.id; })[0][d.currency]:0;
+            	    	d.volume = (d.currency != 'OTH')?dataset.filter(function(n) { return selected_dataset == n.Index; })[0][d.currency]:0;
                 	});
 
             		cy.style("fill", function(d, i) { return (((countries[i].currency == "OTH") || (countries[i].volume == ''))?inactive_color:color(d.color = d.volume + 1 | 0)); });
@@ -759,7 +759,7 @@
 
     	    	    dropDownHTML.options[selected_dataset].selected = true;
         	    	countries.forEach(function(d) { 
-            	    	d.volume = (d.currency != 'OTH')?dataset.filter(function(n) { return selected_dataset == n.id; })[0][d.currency]:0;
+            	    	d.volume = (d.currency != 'OTH')?dataset.filter(function(n) { return selected_dataset == n.Index; })[0][d.currency]:0;
                 	});
 
             		cy.style("fill", function(d, i) { return (((countries[i].currency == "OTH") || (countries[i].volume == ''))?inactive_color:color(d.color = d.volume + 1 | 0)); });
