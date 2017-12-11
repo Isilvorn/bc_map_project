@@ -255,9 +255,9 @@
 
 
    		var volline = [];
-   		dataset.foreach(function(d)) {
-   			volline.push({ x: parseFloat(d.Index), y: parseFloat(d.USD)})
-   		}
+   		dataset.foreach(function(d) {
+   			volline.push({ x: parseFloat(d.Index), y: parseFloat(d.USD)});
+   		});
 
 		var margin = {top: 20, right: 20, bottom: 60, left: 70},
     		iwidth = xrchart_width - margin.left - margin.right,
