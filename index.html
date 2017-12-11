@@ -257,6 +257,8 @@
    		var volline = [];
    		dataset.forEach(function(d) {
    			volline.push({ x: parseFloat(d.Index), y: parseFloat(d.USD)});
+   			console.log(parseFloat(d.Index));
+   			console.log(parseFloat(d.USD));
    		});
 
 		var margin = {top: 20, right: 20, bottom: 60, left: 70},
