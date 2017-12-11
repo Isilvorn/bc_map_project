@@ -256,9 +256,11 @@
 
    		var volline = [];
    		dataset.forEach(function(d) {
-   			volline.push({ x: parseFloat(d.Index), y: parseFloat(d.USD)});
+   			if (isNaN(parseFloat(d.USD))) yvalue = 500.0;
+   			else                          yvalue = parseFloat(d.USD); 
+   			volline.push({ x: parseInt(d.Index), y: yvalue });
    			console.log(parseFloat(d.Index));
-   			console.log(parseFloat(d.USD));
+   			console.log(yvalue);
    		});
 
 		var margin = {top: 20, right: 20, bottom: 60, left: 70},
