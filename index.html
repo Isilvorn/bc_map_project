@@ -299,7 +299,7 @@
     		.y1(function(d) { return y(d.y); });
 
 		var vline = d3.svg.line()
-    		.x(function(d) { return xvol(d.x-1); })
+    		.x(function(d) { return xvol(d.x+1); })
     		.y(function(d) { return yvol(d.y); })
     		.interpolate('linear');
 
@@ -613,10 +613,10 @@
     				.scale(y)
     				.orient("left");
 
-				area = d3.svg.area()
-    				.x(function(d) { return x(d.x); })
-    				.y0(iheight)
-    				.y1(function(d) { return y(d.y); });
+				//area = d3.svg.area()
+    			//	.x(function(d) { return x(d.x); })
+    			//	.y0(iheight)
+    			//	.y1(function(d) { return y(d.y); });
 
 				//vline = d3.svg.line()
     			//	.x(function(d) { return xvol(d.x); })
