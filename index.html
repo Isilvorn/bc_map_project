@@ -658,6 +658,7 @@
           });
 
         playButton.on("click", function() {
+        	console.log("click");
             var cy = svg.selectAll(".country").data(countries);          
             selected_dataset++;
             dropDownHTML.options[selected_dataset].selected = true;
