@@ -313,6 +313,11 @@
    			.attr("class", "area")
     		.attr("d", area);
 
+		cht.append("path")
+			.attr("id","vol_line")
+    		.datum(volline)
+    		.attr("d", line);
+
 		cht.append("g")
     		.attr("class", "x axis")
     		.attr("transform", "translate(0," + iheight + ")")
