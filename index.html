@@ -267,12 +267,20 @@
     		.domain([0, d3.max(chartdata, function(d) { return d.x; })])
     		.range([0, iwidth]);
 
+		var xvol = d3.scale.linear()
+    		.domain([0, d3.max(volline, function(d) { return d.x; })])
+    		.range([0, iwidth]);
+
     	var xreverse = d3.scale.linear()
     		.domain([0, iwidth])
     		.range([0, d3.max(chartdata, function(d) { return d.x; })]);
 
 		var y = d3.scale.linear()
     		.domain([0, d3.max(chartdata, function(d) { return d.y; })])
+    		.range([iheight, 0]);
+
+		var yvol = d3.scale.linear()
+    		.domain([0, d3.max(volline, function(d) { return d.y; })])
     		.range([iheight, 0]);
 
 		var xAxis = d3.svg.axis()
