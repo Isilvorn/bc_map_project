@@ -316,7 +316,7 @@
     		.attr("d", area);
 
 		cht.append("path")
-			.attr("id","vol_line")
+			.attr("id","volpath")
     		.attr("d", vline(volline))
     		.attr("stroke","gray")
     		.attr("stroke-width",2)
@@ -530,7 +530,7 @@
 
          var mkr = d3.select("#marker");
          var pth = d3.select("#chartpath");
-         var lin = d3.select("#vol_line");
+         var lin = d3.select("#volpath");
          var lbl = d3.select("#chartlabel");
          var axs = d3.select("#chartyaxis");
          var lps = d3.select("#linepos");
@@ -598,10 +598,10 @@
    				});
 
    				volline = [];
-   				dataset.forEach(function(d) {
-   					if (isNaN(parseFloat(d.USD))) yvalue = 500.0;
-   					else                          yvalue = parseFloat(d.USD); 
-   					volline.push({ x: parseInt(d.Index), y: yvalue });
+   				dataset.forEach(function(e) {
+   					if (isNaN(parseFloat(e[d.currency]))) yvalue = 500.0;
+   					else                                  yvalue = parseFloat(e[d.currency]); 
+   					volline.push({ x: parseInt(e.Index), y: yvalue });
    				});
 
 
@@ -609,10 +609,6 @@
     				.domain([0, d3.max(chartdata, function(d) { return d.y; })])
     				.range([iheight, 0]);
 
-				yvol = d3.scale.linear()
-    				.domain([0, d3.max(volline, function(d) { return d.y; })])
-    				.range([iheight, 0]);
-    				
 				yAxis = d3.svg.axis()
     				.scale(y)
     				.orient("left");
