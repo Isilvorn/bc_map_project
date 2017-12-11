@@ -254,6 +254,11 @@
    		});
 
 
+   		var volline = [];
+   		dataset.foreach(function(d)) {
+   			volline.push({ x: parseFloat(d.Index), y: parseFloat(d.USD)})}
+   		}
+
 		var margin = {top: 20, right: 20, bottom: 60, left: 70},
     		iwidth = xrchart_width - margin.left - margin.right,
     		iheight = xrchart_height - margin.top - margin.bottom;
@@ -361,11 +366,6 @@
     		.scale(say)
     		.orient("left");
 
-		var sarea_cht1 = d3.svg.area()
-    		.x(function(d) { return sax(d.x); })
-    		.y0(iheight)
-    		.y1(function(d) { return say(d.y1); });
-
 		var sarea_cht8 = d3.svg.area()
     		.x(function(d) { return sax(d.x); })
     		.y0(iheight)
@@ -400,6 +400,11 @@
     		.x(function(d) { return sax(d.x); })
     		.y0(iheight)
     		.y1(function(d) { return say(d.y2 + d.y1); });
+
+		var sarea_cht1 = d3.svg.area()
+    		.x(function(d) { return sax(d.x); })
+    		.y0(iheight)
+    		.y1(function(d) { return say(d.y1); });
 
 		var sarea = d3.select("svg#stackedarea")
     		.attr("width", iwidth + margin.left + margin.right)
