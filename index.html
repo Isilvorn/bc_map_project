@@ -259,8 +259,6 @@
    			if (isNaN(parseFloat(d.USD))) yvalue = 500.0;
    			else                          yvalue = parseFloat(d.USD); 
    			volline.push({ x: parseInt(d.Index), y: yvalue });
-   			console.log(d.Index);
-   			console.log(yvalue);
    		});
 
 		var margin = {top: 20, right: 20, bottom: 60, left: 70},
@@ -320,7 +318,7 @@
 		cht.append("path")
 			.attr("id","vol_line")
     		.attr("d", vline(volline))
-    		.attr("stroke","black")
+    		.attr("stroke","gray")
     		.attr("stroke-width",2)
     		.attr("fill","none");
 
@@ -532,6 +530,7 @@
 
          var mkr = d3.select("#marker");
          var pth = d3.select("#chartpath");
+         var lin = d3.select("#vol_line");
          var lbl = d3.select("#chartlabel");
          var axs = d3.select("#chartyaxis");
          var lps = d3.select("#linepos");
@@ -596,8 +595,15 @@
 		   			if (isNaN(parseFloat(e['BTC' + d.currency]))) yvalue = 0.0;
    					else                                          yvalue = parseFloat(e['BTC' + d.currency]); 
    					chartdata.push({ x: parseFloat(e.Index), y: yvalue, date: e.Date });
-	   				//chartdata.push({ x: parseFloat(e.Index), y: yvalue });
    				});
+
+   				volline = [];
+   				dataset.forEach(function(d) {
+   					if (isNaN(parseFloat(d.USD))) yvalue = 500.0;
+   					else                          yvalue = parseFloat(d.USD); 
+   					volline.push({ x: parseInt(d.Index), y: yvalue });
+   				});
+
 
 				y = d3.scale.linear()
     				.domain([0, d3.max(chartdata, function(d) { return d.y; })])
@@ -612,8 +618,14 @@
     				.y0(iheight)
     				.y1(function(d) { return y(d.y); });
 
+				vline = d3.svg.line()
+    				.x(function(d) { return xvol(d.x); })
+    				.y(function(d) { return yvol(d.y); })
+    				.interpolate('linear');
+
     			pth.datum(chartdata)
     				.attr("d", area);
+    			lin.attr("d", vline(volline));
     			lbl.text("BTC Exchange Rate (" + d.currency + ")*");
     			axs.call(yAxis);
     			mkr.attr("x",x(parseInt(selected_dataset)+23)-2);
