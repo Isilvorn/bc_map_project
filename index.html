@@ -299,7 +299,7 @@
     		.y1(function(d) { return y(d.y); });
 
 		var vline = d3.svg.line()
-    		.x(function(d) { return xvol(d.x); })
+    		.x(function(d) { return xvol(d.x-1); })
     		.y(function(d) { return yvol(d.y); })
     		.interpolate('linear');
 
@@ -618,10 +618,10 @@
     				.y0(iheight)
     				.y1(function(d) { return y(d.y); });
 
-				vline = d3.svg.line()
-    				.x(function(d) { return xvol(d.x); })
-    				.y(function(d) { return yvol(d.y); })
-    				.interpolate('linear');
+				//vline = d3.svg.line()
+    			//	.x(function(d) { return xvol(d.x); })
+    			//	.y(function(d) { return yvol(d.y); })
+    			//	.interpolate('linear');
 
     			pth.datum(chartdata)
     				.attr("d", area);
