@@ -609,6 +609,10 @@
     				.domain([0, d3.max(chartdata, function(d) { return d.y; })])
     				.range([iheight, 0]);
 
+				yvol = d3.scale.linear()
+    				.domain([0, d3.max(volline, function(d) { return d.y; })])
+    				.range([iheight, 0]);
+    				
 				yAxis = d3.svg.axis()
     				.scale(y)
     				.orient("left");
