@@ -296,6 +296,11 @@
     		.y0(iheight)
     		.y1(function(d) { return y(d.y); });
 
+		var line = d3.svg.line()
+    		.x(function(d) { return xvol(d.x); })
+    		.y(function(d) { return yvol(d.y); })
+    		.interpolate('linear');
+
 		var cht = d3.select("svg#area")
     		.attr("width", iwidth + margin.left + margin.right)
     		.attr("height", iheight + margin.top + margin.bottom)
