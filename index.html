@@ -296,7 +296,7 @@
     		.y0(iheight)
     		.y1(function(d) { return y(d.y); });
 
-		var line = d3.svg.line()
+		var vline = d3.svg.line()
     		.x(function(d) { return xvol(d.x); })
     		.y(function(d) { return yvol(d.y); })
     		.interpolate('linear');
@@ -315,8 +315,10 @@
 
 		cht.append("path")
 			.attr("id","vol_line")
-    		.datum(volline)
-    		.attr("d", line);
+    		.attr("d", vline(volline))
+    		.attr("stroke","black")
+    		.attr("stroke-width",2)
+    		.attr("fill","none");
 
 		cht.append("g")
     		.attr("class", "x axis")
