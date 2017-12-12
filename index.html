@@ -580,7 +580,20 @@
           .attr("d", path)
           .style("fill", function(d, i) { return (((countries[i].currency == "OTH") || (countries[i].volume == ''))?inactive_color:color(d.color = d.volume + 1 | 0)); });
 
-      hed.html("<a href='http://www.orender.net'>test</a>");
+      // legend
+      wmp.append("rect")
+      	.attr("x",800)
+      	.attr("y",500)
+      	.attr("width",20)
+      	.attr("height",20)
+      	.attr("fill","blue");
+
+      wmp.append("text")
+      	.attr("x",825)
+      	.attr("y",500)
+    	.attr("font-size",15)
+    	.attr("font-weight","bold")
+    	.text("Low activity");
 
       //Show/hide tooltip
       country
