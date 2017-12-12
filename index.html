@@ -73,6 +73,13 @@
           font-family: 'Helvetica';
           text-align: center;
       	}
+      h3 {}
+      	.h31 {
+          color: #CCCCCC;
+          font-size: 15px;
+          font-family: 'Helvetica';
+          text-align: left;
+      	}
       p {}
         .para2 { 
           font-size: 24px;
@@ -230,9 +237,10 @@
         .defer(d3.csv, "data/001_Normalized_Data_Set.csv")
         .defer(d3.csv, "data/xrdata.csv")
         .defer(d3.csv, "data/002_Contributions.csv")
+        .defer(d3.csv, "data/003_Headlines.csv")
         .await(ready);
 
-      function ready(error, world, names, dataset, xrdata, sadata) {
+      function ready(error, world, names, dataset, xrdata, sadata, heads) {
 
     	var yvalue,y1,y2,y3,y4,y5,y6,y7,y8;
    		var chartdata = [];
