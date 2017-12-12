@@ -648,6 +648,10 @@
     	.attr("font-weight","bold")
     	.text("(compared over the previous 6 weeks)");
 
+
+      hed.html("<h3 class='h31'><a href='" + heads[0]['Link'] + "'>HEADLINE: " + 
+        heads[0]['Headline'] + " (" + heads[0]['Date'] + ")</a></h3>");
+
       //Show/hide tooltip
       country
           .on("mousemove", function(d,i) {
@@ -738,6 +742,9 @@
 
             cy.style("fill", function(d, i) { return (((countries[i].currency == "OTH") || (countries[i].volume == ''))?inactive_color:color(d.color = d.volume + 1 | 0)); });
 
+            hed.html("<h3 class='h31'><a href='" + heads[selected_dataset]['Link'] + "'>HEADLINE: " + 
+            	heads[selected_dataset]['Headline'] + " (" + heads[selected_dataset]['Date'] + ")</a></h3>");
+
             sa_mkr.attr("x",sax(parseInt(selected_dataset)+23)-2);
             mkr.attr("x",x(parseInt(selected_dataset)+23)-2);
 
@@ -811,6 +818,9 @@
 
             		cy.style("fill", function(d, i) { return (((countries[i].currency == "OTH") || (countries[i].volume == ''))?inactive_color:color(d.color = d.volume + 1 | 0)); });
 
+            		hed.html("<h3 class='h31'><a href='" + heads[selected_dataset]['Link'] + "'>HEADLINE: " + 
+            			heads[selected_dataset]['Headline'] + " (" + heads[selected_dataset]['Date'] + ")</a></h3>");
+
             		sa_mkr.attr("x",sax(parseInt(selected_dataset)+23)-2);
             		mkr.attr("x",x(parseInt(selected_dataset)+23)-2);
             	}
@@ -834,6 +844,9 @@
                 	});
 
             		cy.style("fill", function(d, i) { return (((countries[i].currency == "OTH") || (countries[i].volume == ''))?inactive_color:color(d.color = d.volume + 1 | 0)); });
+
+            		hed.html("<h3 class='h31'><a href='" + heads[selected_dataset]['Link'] + "'>HEADLINE: " + 
+            			heads[selected_dataset]['Headline'] + " (" + heads[selected_dataset]['Date'] + ")</a></h3>");
 
             		sa_mkr.attr("x",sax(parseInt(selected_dataset)+23)-2);
             		mkr.attr("x",x(parseInt(selected_dataset)+23)-2);
