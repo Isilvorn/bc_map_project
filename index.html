@@ -708,7 +708,7 @@
                 d.volume = (d.currency != 'OTH')?dataset.filter(function(n) { return selected_dataset == n.id; })[0][d.currency]:0;
                 });
 
-            cy.style("fill", function(d, i) { return (((countries[i].currency == "OTH") || (countries[i].volume == ''))?inactive_color:color(d.color = d.volume )); });
+            cy.style("fill", function(d, i) { return (((countries[i].currency == "OTH") || (countries[i].volume == ''))?inactive_color:color(d.color = d.volume + 1 | 0)); });
 
             hed.html("<h3 class='h31'><a href='http://www.orender.net'>" + 
             	"jason" + "</a></h3>");
