@@ -31,7 +31,7 @@
       #headline {
         border: 2px solid: #000;
         width: 960px;
-        height: 20px;
+        height: 30px;
         margin-left: 40px;
       }
       .country {
@@ -536,6 +536,7 @@
 			.classed("hidden", true);
 
 
+		 var wmp = d3.select("#map");
          var mkr = d3.select("#marker");
          var pth = d3.select("#chartpath");
          var lin = d3.select("#volpath");
@@ -577,6 +578,8 @@
           .attr("title", function(d,i) { return d.name; })
           .attr("d", path)
           .style("fill", function(d, i) { return (((countries[i].currency == "OTH") || (countries[i].volume == ''))?inactive_color:color(d.color = d.volume + 1 | 0)); });
+
+      wmp.html("<a href='http://www.orender.net'>test</a>");
 
       //Show/hide tooltip
       country
