@@ -34,6 +34,12 @@
         height: 30px;
         margin-left: 40px;
       }
+      #legend {
+        border: 2px solid: #000;
+        width: 960px;
+        height: 30px;
+        margin-left: 40px;
+      }
       .country {
         fill: #ccc;
         stroke: #fff;
@@ -119,6 +125,10 @@
     <div id="headline">
     </div>
     <div id="map">
+    </div>
+    <div>
+    	<svg id="legend">
+    	</svg>
     </div>
     <div id="chart">
 	    <svg id="area">
@@ -536,7 +546,7 @@
 			.classed("hidden", true);
 
 
-		 var wmp = d3.select("#map");
+		 var leg = d3.select("#legend");
 		 var hed = d3.select("#headline");
          var mkr = d3.select("#marker");
          var pth = d3.select("#chartpath");
@@ -581,16 +591,16 @@
           .style("fill", function(d, i) { return (((countries[i].currency == "OTH") || (countries[i].volume == ''))?inactive_color:color(d.color = d.volume + 1 | 0)); });
 
       // legend
-      wmp.append("rect")
-      	.attr("x",800)
-      	.attr("y",500)
+      leg.append("rect")
+      	.attr("x",5)
+      	.attr("y",5)
       	.attr("width",20)
       	.attr("height",20)
       	.attr("fill","blue");
 
-      wmp.append("text")
-      	.attr("x",825)
-      	.attr("y",500)
+      leg.append("text")
+      	.attr("x",30)
+      	.attr("y",5)
     	.attr("font-size",15)
     	.attr("font-weight","bold")
     	.text("Low activity");
@@ -637,16 +647,6 @@
 				yAxis = d3.svg.axis()
     				.scale(y)
     				.orient("left");
-
-				//area = d3.svg.area()
-    			//	.x(function(d) { return x(d.x); })
-    			//	.y0(iheight)
-    			//	.y1(function(d) { return y(d.y); });
-
-				//vline = d3.svg.line()
-    			//	.x(function(d) { return xvol(d.x); })
-    			//	.y(function(d) { return yvol(d.y); })
-    			//	.interpolate('linear');
 
     			pth.datum(chartdata)
     				.attr("d", area);
