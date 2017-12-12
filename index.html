@@ -551,6 +551,20 @@
     		.attr("y",iheight + 18)
     		.text("North America");
 
+        sarea.append("rect")
+          	.attr("x",5)
+          	.attr("y",iheight + 25)
+          	.attr("width",15)
+          	.attr("height",15)
+          	.attr("fill","green");
+
+    	sarea.append("text")
+    		.attr("font-size",12)
+    		.attr("font-weight","bold")
+    		.attr("x",25)
+    		.attr("y",iheight + 38)
+    		.text("South America");
+
         // marker
         sarea.append("rect")
         	.attr("id","topmarker")
