@@ -537,6 +537,7 @@
 
 
 		 var wmp = d3.select("#map");
+		 var hed = d3.select("#headline");
          var mkr = d3.select("#marker");
          var pth = d3.select("#chartpath");
          var lin = d3.select("#volpath");
@@ -579,7 +580,7 @@
           .attr("d", path)
           .style("fill", function(d, i) { return (((countries[i].currency == "OTH") || (countries[i].volume == ''))?inactive_color:color(d.color = d.volume + 1 | 0)); });
 
-      wmp.html("<a href='http://www.orender.net'>test</a>");
+      hed.html("<a href='http://www.orender.net'>test</a>");
 
       //Show/hide tooltip
       country
