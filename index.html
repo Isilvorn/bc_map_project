@@ -633,6 +633,13 @@
     	.attr("font-weight","bold")
     	.text("High activity");
 
+      leg.append("text")
+      	.attr("x",400)
+      	.attr("y",20)
+    	.attr("font-size",15)
+    	.attr("font-weight","bold")
+    	.text("(compared over the previous 6 weeks)");
+
       //Show/hide tooltip
       country
           .on("mousemove", function(d,i) {
