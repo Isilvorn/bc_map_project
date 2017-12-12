@@ -621,6 +621,20 @@
     		.attr("y",iheight + 38)
     		.text("Asia");
 
+        sarea.append("rect")
+          	.attr("x",450)
+          	.attr("y",iheight + 5)
+          	.attr("width",15)
+          	.attr("height",15)
+          	.attr("fill","yellow");
+
+    	sarea.append("text")
+    		.attr("font-size",12)
+    		.attr("font-weight","bold")
+    		.attr("x",470)
+    		.attr("y",iheight + 18)
+    		.text("Africa");
+
         // marker
         sarea.append("rect")
         	.attr("id","topmarker")
