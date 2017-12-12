@@ -536,6 +536,22 @@
     	//	.attr("class", "y axis")
     	//	.call(sayAxis);
 
+    	// legend
+        sarea.append("rect")
+          	.attr("x",margin.left)
+          	.attr("y",margin.top)
+          	.attr("width",15)
+          	.attr("height",15)
+          	.attr("fill","blue");
+
+    	sarea.append("text")
+    		.attr("font-size",12)
+    		.attr("font-weight","bold")
+    		.attr("x",margin.left + 20)
+    		.attr("y",margin.top + 20)
+    		.text("North America");
+
+        // marker
         sarea.append("rect")
         	.attr("id","topmarker")
           	.attr("x",sax(23)-2)
