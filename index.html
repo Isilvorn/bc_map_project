@@ -845,17 +845,17 @@
 
         playButton
           .on("mousemove", function(d,i) {
-            //playButton.attr("src","play_button_hover.png");
+            playButton.attr("src","play_button_hover.png");
           });
 
         playButton
           .on("mouseout", function(d,i) {
-            //playButton.attr("src","play_button.png");
+            playButton.attr("src","play_button.png");
           });
 
         playButton.on("click", function() {
 
-            //playButton.attr("src","play_button_click.png");
+            playButton.attr("src","play_button_click.png");
             var cy = svg.selectAll(".country").data(countries);          
             selected_dataset++;
             dropDownHTML.options[selected_dataset].selected = true;
