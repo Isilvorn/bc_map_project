@@ -120,7 +120,6 @@
       <!-- dropdown -->
     <div style="margin-left: 40px">
       <select id="dropdown"></select>
-      <rect id="button" style="width: 25px; height: 25px"></rect>
     </div>
     <hr style="width: 100%; height: 2px;">
     <h2 style="margin-left: 40px; font-size: 24px; font-weight: bold; color: #000000;">Relative Bitcoin Volume</h2>
@@ -163,7 +162,7 @@
           .attr("value", function(option) { return option.value; })
           .text(function(option) { return option.text; });
 
-      d3.select("#button").html("<img src='play_button.png'></img>");
+
 
 
       // initial dataset on load
@@ -172,7 +171,6 @@
       // dropdown dataset selection
       var dropDown = d3.select("#dropdown");
       var dropDownHTML = document.getElementById("dropdown");
-      var playButton = d3.select("#button");
       var subtitle = d3.select("#weekof");
       var chartnote = d3.select("#chartnote");
 
@@ -762,6 +760,13 @@
     	.attr("font-weight","bold")
     	.text("(compared over the previous 6 weeks)");
 
+      leg.append("img")
+      	.attr("id","button")
+      	.attr("x",910)
+      	.attr("y",5)
+      	.attr("src","play_button.png")
+
+      var playButton = d3.select("#button");
 
       hed.html("<h3 class='h31'><a href='" + heads[0]['Link'] + "'>HEADLINE: " + 
         heads[0]['Headline'] + " (" + heads[0]['Date'] + ")</a></h3>");
@@ -838,15 +843,17 @@
 
         playButton
           .on("mousemove", function(d,i) {
-            playButton.html("<img src='play_button_inverse.png'></img>");
+            playButton.attr("src","play_button_hover.png");
           });
 
         playButton
           .on("mouseout", function(d,i) {
-            playButton.html("<img src='play_button.png'></img>");
+            playButton.attr("src","play_button.png");
           });
 
         playButton.on("click", function() {
+        	
+            playButton.attr("src","play_button_click.png");
             var cy = svg.selectAll(".country").data(countries);          
             selected_dataset++;
             dropDownHTML.options[selected_dataset].selected = true;
@@ -862,7 +869,6 @@
             sa_mkr.attr("x",sax(parseInt(selected_dataset)+23)-2);
             mkr.attr("x",x(parseInt(selected_dataset)+23)-2);
 
-            playButton.html("<img src='play_button_click.png'></img>");
         });
 
         chartbackground.on("mousemove", function(d,i) {
