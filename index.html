@@ -36,7 +36,7 @@
       }
       #legend {
         border: 2px solid: #000;
-        width: 923px;
+        width: 896px;
         height: 30px;
         margin-left: 40px;
       }
@@ -135,6 +135,7 @@
     <div>
     	<svg id="legend">
     	</svg>
+    	<img id="back" src="back_button.png" alt="Retreat One Step" height="30" width="37">
     	<img id="button" src="play_button.png" alt="Advance One Step" height="30" width="37">
     </div>
     <div id="chart">
@@ -769,6 +770,7 @@
     	.text(" ");
 
       var playButton = d3.select("#button");
+      var backButton = d3.select("#back");
 
       hed.html("<h3 class='h31'><a href='" + heads[0]['Link'] + "'>HEADLINE: " + 
         heads[0]['Headline'] + " (" + heads[0]['Date'] + ")</a></h3>");
@@ -843,6 +845,37 @@
 
         });
 
+        backButton
+          .on("mousemove", function(d,i) {
+            backButton.attr("src","back_button_hover.png");
+          });
+
+        backButton
+          .on("mouseout", function(d,i) {
+            backButton.attr("src","back_button.png");
+          });
+
+        backButton.on("click", function() {
+
+            backButton.attr("src","back_button_click.png");
+            var cy = svg.selectAll(".country").data(countries);          
+            selected_dataset--;
+            if (selected_dataset < 1) selected_dataset=1;
+            dropDownHTML.options[selected_dataset].selected = true;
+            countries.forEach(function(d) { 
+                d.volume = (d.currency != 'OTH')?dataset.filter(function(n) { return selected_dataset == n.id; })[0][d.currency]:0;
+                });
+
+            cy.style("fill", function(d, i) { return (((countries[i].currency == "OTH") || (countries[i].volume == ''))?inactive_color:color(d.color = d.volume + 1 | 0)); });
+
+            hed.html("<h3 class='h31'><a href='" + heads[selected_dataset]['Link'] + "'>HEADLINE: " + 
+            	heads[selected_dataset]['Headline'] + " (" + heads[selected_dataset]['Date'] + ")</a></h3>");
+
+            sa_mkr.attr("x",sax(parseInt(selected_dataset)+23)-2);
+            mkr.attr("x",x(parseInt(selected_dataset)+23)-2);
+
+        });
+
         playButton
           .on("mousemove", function(d,i) {
             playButton.attr("src","play_button_hover.png");
@@ -858,6 +891,7 @@
             playButton.attr("src","play_button_click.png");
             var cy = svg.selectAll(".country").data(countries);          
             selected_dataset++;
+            if (selected_dataset > 223) selected_dataset=223;
             dropDownHTML.options[selected_dataset].selected = true;
             countries.forEach(function(d) { 
                 d.volume = (d.currency != 'OTH')?dataset.filter(function(n) { return selected_dataset == n.id; })[0][d.currency]:0;
