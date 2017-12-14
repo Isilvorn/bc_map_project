@@ -764,6 +764,8 @@
       	.attr("id","button")
       	.attr("x",910)
       	.attr("y",5)
+      	.attr("width",37)
+      	.attr("height",30)
       	.attr("src","play_button.png")
 
       var playButton = d3.select("#button");
@@ -852,7 +854,7 @@
           });
 
         playButton.on("click", function() {
-        	
+
             playButton.attr("src","play_button_click.png");
             var cy = svg.selectAll(".country").data(countries);          
             selected_dataset++;
