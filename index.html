@@ -763,12 +763,13 @@
       leg.append("rect")
       	.attr("id","button")
       	.attr("x",910)
-      	.attr("y",5)
+      	.attr("y",2)
       	.attr("width",37)
       	.attr("height",30)
       	//.attr("src","play_button.png")
 
       var playButton = d3.select("#button");
+      playButton.html("<img src='play_button.png'></img>");
 
       hed.html("<h3 class='h31'><a href='" + heads[0]['Link'] + "'>HEADLINE: " + 
         heads[0]['Headline'] + " (" + heads[0]['Date'] + ")</a></h3>");
