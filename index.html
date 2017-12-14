@@ -394,6 +394,13 @@
         	.attr("fill","gray")
 			.classed("hidden", true);
 
+		cht.append("rect")
+			.attr("x",margin.left)
+			.attr("y",iheight+20)
+			.attr("width",50)
+			.attr("height",2)
+			.attr("style","fill:lightgray");
+
 		var sax = d3.scale.linear()
     		.domain([0, d3.max(sareadata, function(d) { return d.x; })])
     		.range([0, iwidth]);
