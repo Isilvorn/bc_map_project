@@ -753,12 +753,19 @@
     	.attr("font-weight","bold")
     	.text("High activity");
 
-      //leg.append("text")
-      	//	.attr("x",400)
-      	//	.attr("y",20)
-    	//.attr("font-size",15)
-    	//.attr("font-weight","bold")
-    	//.text("(compared over the previous 6 weeks)");
+      leg.append("text")
+      	.attr("x",400)
+      	.attr("y",20)
+    	.attr("font-size",15)
+    	.attr("font-weight","bold")
+    	.text("(compared over the previous 6 weeks)");
+
+      leg.append("text")
+      	.attr("x",800)
+      	.attr("y",20)
+    	.attr("font-size",15)
+    	.attr("font-weight","bold")
+    	.text("");
 
       leg.append("rect")
       	.attr("id","button")
@@ -766,10 +773,11 @@
       	.attr("y",2)
       	.attr("width",37)
       	.attr("height",30)
+      	.fill("white");
       	//.attr("src","play_button.png")
 
       var playButton = d3.select("#button");
-      playButton.html("<img src='play_button.png'></img>");
+      playButton.html("<img src='play_button.png'>");
 
       hed.html("<h3 class='h31'><a href='" + heads[0]['Link'] + "'>HEADLINE: " + 
         heads[0]['Headline'] + " (" + heads[0]['Date'] + ")</a></h3>");
