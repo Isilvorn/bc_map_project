@@ -134,7 +134,7 @@
     </div>
     <div>
     	<svg id="legend">
-    		<img src='play_button.png' alt='Advance One Step' height='37' width='30'>
+    		<img id="button" src="play_button.png" alt="Advance One Step" x="910" y="2" height="37" width="30">
     	</svg>
     </div>
     <div id="chart">
@@ -768,17 +768,7 @@
     	.attr("font-weight","bold")
     	.text(" ");
 
-      leg.append("rect")
-      	.attr("id","button")
-      	.attr("x",910)
-      	.attr("y",2)
-      	.attr("width",37)
-      	.attr("height",30)
-      	.fill("white");
-      	//.attr("src","play_button.png")
-
       var playButton = d3.select("#button");
-      playButton.html("<img src='play_button.png' alt='Advance One Step' height='37' width='30'>");
 
       hed.html("<h3 class='h31'><a href='" + heads[0]['Link'] + "'>HEADLINE: " + 
         heads[0]['Headline'] + " (" + heads[0]['Date'] + ")</a></h3>");
