@@ -396,10 +396,17 @@
 
 		cht.append("rect")
 			.attr("x",0)
-			.attr("y",iheight+40)
+			.attr("y",iheight+30)
 			.attr("width",50)
 			.attr("height",2)
 			.attr("style","fill:lightgray");
+
+    	cht.append("text")
+    		.attr("font-size",12)
+    		.attr("font-weight","bold")
+    		.attr("x",55)
+    		.attr("y",iheight + 20)
+    		.text("Relative transaction volume (activity)");
 
 		var sax = d3.scale.linear()
     		.domain([0, d3.max(sareadata, function(d) { return d.x; })])
