@@ -1,4 +1,3 @@
 Name: Jason Orender  
 Class: CS725, Fall 2017  
-Project Web Page: http://www.cs.odu.edu/~jorender/cs725/CS725-PROJECT_Y9FziL/  
-Project Video: https://www.youtube.com/watch?v=zLvspwRAfN0
+Project Web Page: http://www.orender.net/bc_map_project/  
